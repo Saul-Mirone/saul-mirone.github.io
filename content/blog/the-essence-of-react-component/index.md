@@ -11,7 +11,7 @@ Furthermore, what are these components we write every day?
 
 # Just Functions
 
-Consider the following code for a simple clock, guess what will be printed in the chrome devtools.
+Consider the following code implementing a simple clock, guess what will be printed in the chrome devtools.
 
 ```javascript
 const Text = () =>  {
@@ -40,7 +40,7 @@ const App = () => {
 };
 ```
 
-The fact is that every second, it will print `App` and `Text` together.
+The fact is that it will print `App` and `Text` together every second.
 
 React components are just functions. If you have experience with typescript in React project,
 you might meet a useful type: `React.FC`, which is just an acronym for `FunctionComponent`.
