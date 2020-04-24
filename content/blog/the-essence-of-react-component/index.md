@@ -4,10 +4,10 @@ date: "2020-04-24T06:18:19.632Z"
 description: Render forever.
 ---
 
-Maybe you use react for a long time.
-You use the elegant jsx with react hooks, create pages built up with components. 
-However, do you know why you just need to write some  component so that react can manage itself.
-Do you know what the React components you write every day really is?
+Maybe you have used React for a long time:
+using the elegant jsx with React hooks and creating pages built up with components. 
+However, why do we only need to write declarative components to let React manage itself?
+Furthermore, what are these components we write every day?
 
 # Just Functions
 
