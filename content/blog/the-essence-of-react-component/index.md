@@ -43,7 +43,7 @@ const App = () => {
 The fact is that it will print `App` and `Text` together every second.
 
 React components are just functions. If you have experience in TypeScript with React project,
-you might have met a useful type annotation: `React.FC`, which is just an acronym for `FunctionComponent`.
+you may have met a useful type annotation: `React.FC`, which is just an acronym for `FunctionComponent`.
 The definition of it is something like: 
 
 ```typescript
@@ -74,14 +74,14 @@ const Something = () => {
 
 During the creation of a React element,
 it will create its child elements recursively,
-generate an element tree as a result.
+generating an element tree in the end.
 
-So a component's render is the same as a function call.
+So the render of a component is the same as a function call.
 That's why we get `App` and `Text` every second in the previous sample.
 
-# Element For Render
+# Elements For Render
 
-Elements are just a kind of data structure. You can imagine them into objects.
+Elements are just a kind of data structure. You can regard them as objects.
 For example: 
 
 ```javascript
@@ -97,12 +97,12 @@ const element = {
 
 With the information like `type`, `key`, `props`, `children` on it,
 Renderers can easily transform the data structure into what it wants.
-For example ReactDOM transform elements into dom elements,
-React native transform elements into native widgets.
-You can even create a renderer which just print them on your screen,
-and you get a 'printer renderer'.
+For example, ReactDOM transforms elements into dom elements
+and React native transforms elements into native widgets.
+You can even create a renderer which just prints them on your screen
+and then you get a 'printer renderer'.
 
-When update occurs, a new element will be generated, like this:
+When an update occurs, a new element will be generated, like this:
 
 ```javascript
 // we have a update
@@ -118,17 +118,17 @@ const element = {
 
 # Render What
 
-There is no magic in react to make sure elements generated between updates are the same as generated previously.
+There is no magic in React to make sure elements generated between updates are the same as those generated previously.
 **For every render, there is a new element tree.**
 
 It's possible to create dom elements every time for every render.
-However, that's a highly cost processing.
+However, that's a highly costly processing.
 In fact, React use the [reconciliation](https://reactjs.org/docs/reconciliation.html) to
-know what to do exactly: regenerate the dom element, or just update some contents.
+know what to do exactly: regenerating the dom element or just updating some contents.
 
 As a renderer of React,
 it just needs to implement an interface for [Reconciler](https://github.com/facebook/react/tree/master/packages/react-reconciler),
-then Reconciler will do update jobs using the methods we provide.
+then Reconciler will update using the methods we provide.
 I can use the following pseudo code to describe the relationship between ReactDOM and Reconciler:
 
 ```javascript
@@ -150,9 +150,9 @@ export const hostConfig = {
 };
 ```
 
-We could probably know what should each method deal with by the method name.
+We could probably know what each method should deal with by the method name.
 [The full list of methods is here](https://github.com/facebook/react/blob/master/packages/react-reconciler/src/forks/ReactFiberHostConfig.custom.js).
-For further information if you are interested in React renderer, [here is a good post to read](https://medium.com/@agent_hunt/hello-world-custom-react-renderer-9a95b7cd04bc). 
+For further information, [here is a good post to read](https://medium.com/@agent_hunt/hello-world-custom-react-renderer-9a95b7cd04bc). 
 
 # In Closing
 
@@ -161,13 +161,13 @@ Now, let's conclude what happens during a React update:
 1. Trigger an update for the target component. (It can be the first commit, props or state update, and so on.)
 2. Call components as functions. (Or render method of class components.)
 3. Generate an element tree.
-4. Reconciliation find what to update.
+4. Find what to update by Reconciliation .
 5. Call methods provided by react renderer to commit the update.
 
 If components have a high cost every render,
 You may need to use something like [React.memo](https://reactjs.org/docs/react-api.html#reactmemo) to avoid unnecessary calculation.
 At least for now we know exactly why we need this and other things like `React.useMemo` or `React.useCallback`,
-and why functions in React hook's dependency lists cause infinite execution.
+and why functions in React hook's dependency lists can cause infinite execution.
 
 If this post is really helpful to you,
 I highly recommend you to read Dan Abramov's great post "[React as a UI Runtime](https://overreacted.io/react-as-a-ui-runtime/)".
