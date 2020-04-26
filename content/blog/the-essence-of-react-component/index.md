@@ -76,13 +76,12 @@ During the creation of a React element,
 it will create its child elements recursively,
 generate an element tree as a result.
 
-So every time a component render,
-it's just a function call.
+So a component's render is the same as a function call.
 That's why we get `App` and `Text` every second in the previous sample.
 
 # Element For Render
 
-An Element is just a data structure. You can imagine them into objects.
+Elements are just a kind of data structure. You can imagine them into objects.
 For example: 
 
 ```javascript
