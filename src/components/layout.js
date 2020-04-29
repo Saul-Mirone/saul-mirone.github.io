@@ -62,16 +62,6 @@ const Layout = ({ location, title, children }) => {
   )
 
   React.useEffect(() => {
-    if (typeof window === 'undefined') return;
-
-    const theme = window.localStorage.getItem(themeKey);
-
-    if (!theme) return;
-
-    setTheme(theme);
-  }, []);
-
-  React.useEffect(() => {
     document.body.className = theme
     if (typeof window !== "undefined") {
       window.localStorage.setItem(themeKey, theme)
