@@ -55,11 +55,17 @@ const Header = ({ title, location }) => {
 const themeKey = "theme"
 
 const Layout = ({ location, title, children }) => {
-  const [theme, setTheme] = React.useState(
-    typeof window !== "undefined"
-      ? window.localStorage.getItem(themeKey) || "light"
-      : "light"
-  )
+  const [theme, setTheme] = React.useState("light");
+
+  React.useEffect(() => {
+    if (typeof window === 'undefined') return;
+
+    const theme = window.localStorage.getItem(themeKey);
+
+    if (!theme) return;
+
+    setTheme(theme);
+  }, []);
 
   React.useEffect(() => {
     document.body.className = theme
