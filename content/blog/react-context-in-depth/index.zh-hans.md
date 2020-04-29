@@ -1,18 +1,18 @@
 ---
-title: Performance Optimization in React Context
+title: React Context中的性能优化
 date: "2020-04-28T09:14:55.568Z"
-description: Why React context sometimes make your app slow.
+description: 为什么有时React Context让你的应用变慢。
 ---
 
-A lot of people use React context as some kinds of build-in redux.
-Jack is one of them.
-Jack combined all global state to get a big object to get a 'single source of data' and put it into a provider.
-Then he went to a child component, call `useContext` and pick properties from the context.
-Everything seems worked fine until one day he found the app is too slow to use.
+许多人将React Context用作某种内置的redux。
+Jack就是其中之一,
+他将所有全局状态合并到一个大的对象中，得到一个'单一数据源'，并把它塞进provider。
+然后他找到子组件，调用`useContext`并挑选需要的属性。
+所有事情看起来都很完美，直到有一天，他发现他的应用慢到难以使用。
 
-# A Bad Example
+# 一个糟糕的例子
 
-Consider the following code, it may be the worst practice of React context.
+考虑以下代码，它也许是React context的最糟实践了。
 
 ```jsx
 const Ctx = React.createContext();
@@ -66,17 +66,15 @@ const App = () => {
 }
 ```
 
-# Control the Update of Context Value
+# 让Context值的更新可控
 
-The first problem here is that
-the context's consumer will be notified with a new value every second.
+这里的第一个问题是每一个context的consumer每秒都会收到一个更新通知。
 
-The `clock` state will cause an update of the `App` component,
-make a new value of `Ctx.Provider` will be created.
-(If you don't understand this, maybe my [previous post](/the-essence-of-react-component) can help you).
+`clock`状态会导致`App`组件的更新，使一个新的`Ctx.Provider`的值被创建。
+(如果你无法理解这种行为，也许我的[前一篇博客](/zh-hans/the-essence-of-react-component)能够帮助到你。)
 
-So if you need to use an object or array as the value of context,
-use `useMemo` or `useReducer` to avoid unnecessary creations.
+所以如果你需要将对象或数组当作context的值，
+请使用类似`useMemo`或`useReducer`之类的方式来避免不必要的创建。
 
 ```jsx
 const App = () => {
@@ -96,17 +94,17 @@ const App = () => {
 }
 ```
 
-# Memo Your Selector
+# 记住你的选择
 
-Child components maybe only use some part of the value of the context.
-However, the value has always been updated as a whole.
-If it is high cost for your component to rerender,
-memorize your selector of the value is a good choice.
+子组件可能只使用context中的一部分值，
+然而context的值是作为整体来更新的。
+如果你的组建需要高额的成本来重渲染，
+记住你选择的值可能是一个好的选择。
 
-For example, if we want to memo selector of `SideMenu` component,
-we have two options:
+例如, 如果我们想记住`SideMenu`组件的选择,
+我们有两个选项:
 
-1. Split the component into two and `memo` the inner component.
+1. 将组件拆分为两个并对内部的组件调用`memo`。
 
 ```jsx
 const SideMenuInner = React.memo(({ setHideSideMenu, hideSideMenu }) => {
@@ -128,7 +126,7 @@ const SideMenu = () => {
 };
 ```
 
-We can abstract a [HOC](https://reactjs.org/docs/higher-order-components.html) to do this:
+我们可以抽象出一个[HOC](https://reactjs.org/docs/higher-order-components.html)来做这件事:
 ```jsx
 const ConsumeWithSelector = (Component, context, selector) => {
   const ctx = selector(React.useContext(context));
@@ -136,7 +134,7 @@ const ConsumeWithSelector = (Component, context, selector) => {
 }
 ```
 
-2. Use the `useMemo` method in your component.
+2. 在组件中使用`useMemo`方法。
 
 ```jsx
 const SideMenu = () => {
@@ -150,15 +148,15 @@ const SideMenu = () => {
 };
 ```
 
-# Split Context
+# 拆分Context
 
-When using context in React we should not try to build a 'single store tree'.
-It really makes the app hard to optimise.
-For most cases, contexts can be split into different pieces by their duties.
+当使用context时我们不应该尝试去构建类似"单一数据树"之类的东西，
+它将让应用非常难以优化。
+对于大多数场景，context可以按职责拆分成多个。
 
-For example, in our case, we may split the context into
-`HideSideMenuCtx` and `UserCtx`,
-or even `HideSideMenuState`, `HideSideMenuSetter`, `UserState` and `UserSetter`.
+例如，在之前的例子中，我们可以把context拆分成
+`HideSideMenuCtx`和`UserCtx`,
+甚至拆分成`HideSideMenuState`, `HideSideMenuSetter`, `UserState`和`UserSetter`。
 
 ```jsx
 const App = () => {
@@ -176,7 +174,7 @@ const App = () => {
 }
 ```
 
-However, split contexts into too many pieces may make our app hard to maintain.
-There is no silver bullet in this.
-We should make our choice depending on our situation.
-However, at least we need to know the expected behavior according to the strategies we choose.
+然而，拆分得太碎可能反而导致应用难以维护。
+在这之中没有银弹。
+我们应该根据自己的场景来做出取舍。
+然而，我们至少需要能够预期不同的策略将有怎样的表现。
