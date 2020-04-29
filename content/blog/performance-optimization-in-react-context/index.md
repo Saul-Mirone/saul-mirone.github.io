@@ -1,7 +1,7 @@
 ---
 title: Performance Optimization in React Context
 date: "2020-04-28T09:14:55.568Z"
-description: Why React context sometimes make your app slow.
+description: Why React context sometimes make your app slow?
 ---
 
 A lot of people use React context as some kinds of build-in redux.

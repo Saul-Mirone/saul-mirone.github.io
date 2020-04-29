@@ -1,7 +1,7 @@
 ---
 title: React Context中的性能优化
 date: "2020-04-28T09:14:55.568Z"
-description: 为什么有时React Context让你的应用变慢。
+description: 为什么有时React Context让你的应用变慢？
 ---
 
 许多人将React Context用作某种内置的redux。
