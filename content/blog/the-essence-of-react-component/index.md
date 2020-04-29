@@ -78,6 +78,7 @@ generating an element tree in the end.
 
 So the render of a component is the same as a function call.
 That's why we get `App` and `Text` every second in the previous sample.
+The state's update of the component trigger the rerender of that component, which cause the function called. 
 
 # Elements For Render
 
@@ -98,7 +99,7 @@ const element = {
 With the information like `type`, `key`, `props`, `children` on it,
 Renderers can easily transform the data structure into what it wants.
 For example, ReactDOM transforms elements into dom elements
-and React native transforms elements into native widgets.
+and React Native transforms elements into native widgets.
 You can even create a renderer which just prints them on your screen
 and then you get a 'printer renderer'.
 
@@ -142,7 +143,7 @@ It's something like this:
 export const hostConfig = {
   now: Date.now,
   supportsMutation: true,
-  createInstance: (type, newProps, rootContainerInstance, _currentHostContext, workInProgress) => {},
+  createInstance: (type, newProps, rootContainerInstance) => {},
   createTextInstance: text => {},
   appendInitialChild: (parent, child) => {},
   appendChild(parent, child) {},
@@ -158,7 +159,7 @@ For further information, [here is a good post to read](https://medium.com/@agent
 
 Now, let's conclude what happens during a React update:
 
-1. Trigger an update for the target component. (It can be the first commit, props or state update, and so on.)
+1. Trigger an update for the target component. (It can be the first render, props or state update, and so on.)
 2. Call components as functions. (Or render method of class components.)
 3. Generate an element tree.
 4. Find what to update by Reconciliation .
