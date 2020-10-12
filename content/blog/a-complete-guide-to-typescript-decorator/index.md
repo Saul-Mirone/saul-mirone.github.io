@@ -46,16 +46,16 @@ We can take a quick overview for all the 5 decorators:
 @classDecorator
 class Bird {
   @propertyDecorator
-	public name: string;
-	
-	@methodDecorator
-	public fly(
-	  @parameterDecorator
-		meters: number
-	) {}
-	
-	@accessorDecorator
-	public get egg() {}
+  name: string;
+  
+  @methodDecorator
+  fly(
+    @parameterDecorator
+      meters: number
+  ) {}
+  
+  @accessorDecorator
+  get egg() {}
 }
 ```
 
@@ -206,7 +206,7 @@ type ClassDecorator = <TFunction extends Function>
 * @Returns:  
   If the class decorator returns a value, it will replace the class declaration.
   
-Thus, it's suitable to extend an existing class with some properties or methods.
+Thus, it's suitable for extending an existing class with some properties or methods.
 
 For example, we can add a `toString` method for all
 the classes to overwrite the original `toString` method.
@@ -248,7 +248,7 @@ new Foo().foo; // Property 'foo' does not exist on type 'Foo'
 ```
 
 This is [a well-known issue](https://github.com/microsoft/TypeScript/issues/4881) in typescript.
-What we can do for now is to provide a class to be extended by the target class:
+What we can do for now is to provide a class with type information to be extended by the target class:
 
 ```typescript
 declare function Blah<T>(target: T): T & {foo: number}
@@ -307,16 +307,7 @@ function observable(target: any, key: string): any {
     };
 }
 
-type Observe<T> = {
-  [K in keyof T as `on${capitalize (K & string)}Change`]:
-    (fn: (prev: T[K], next: T[K]) => void) => void;
-};
-
-function observeFactory<T>(): { new(): Observe<T> } {
-  return (class {}) as { new(): Observe<T> };
-}
-
-class C extends observeFactory<{ foo: number; bar: string }>() {
+class C {
   @observable
   foo = -1;
 
@@ -400,7 +391,211 @@ Descriptor in an accessor decorator has keys:
 * `enumerable`
 * `configurable`
 
+For example, we can make the property immutable by a decorator:
+
+```typescript
+function immutable(target: any, propertyKey: string, descriptor: PropertyDescriptor) {
+  const original = descriptor.set;
+
+  descriptor.set = function (value: any) {
+    return original.call(this, { ...value })
+  }
+}
+
+class C {
+  private _point = { x: 0, y: 0 }
+
+  @immutable
+  set point(value: { x: number, y: number }) {
+    this._point = value;
+  }
+
+  get point() {
+    return this._point;
+  }
+}
+
+const c = new C();
+const point = { x: 1, y: 1 }
+c.point = point;
+
+console.log(c.point === point)
+// -> false
+```
+
+## Parameter Decorators
+
+Type annotation:
+```typescript
+type ParameterDecorator = (
+  target: Object,
+  propertyKey: string | symbol,
+  parameterIndex: number
+) => void;
+```
+
+* @Params:
+  1. `target`: Either the constructor function of the class for a static member,
+  or the prototype of the class for an instance member.
+  2. `propertyKey`: The name of the property (Name of the method, not the parameter).
+  3. `parameterIndex`: The ordinal index of the parameter in the function’s parameter list.
+* @Returns:  
+  The return value will be ignored.
+
+A standalone parameter decorator can do few things,
+it's always be used to record information which can be used by other decorators.
+  
 # Combination
 
-For some complex cases, we may need to use different types of decorators together.
-Imagine we want to implement a series of decorators to help us to write http services in nodejs.
+For some complex cases,
+we may need to use different types of decorators together.
+For instance,
+if we want to add not only static type checker,
+but also run-time type checker for our api.
+
+There are 3 steps to implement the feature:
+
+1. Mark the parameters needed to be validated
+(since the parameter decorators evaluate before the method decorators).
+2. Change the value of descriptor of the method,
+run the parameter validators before the method, throw error if failed.
+3. Run the original method.
+
+Here is the code:
+
+```typescript
+type Validator = (x: any) => boolean;
+
+// save the marks
+const validateMap: Record<string, Validator[]> = {};
+
+// 1. mark the parameters need to be validated
+function typedDecoratorFactory(validator: Validator): ParameterDecorator {
+  return (_, key, index) => {
+    const target = validateMap[key as string] ?? [];
+    target[index] = validator;
+    validateMap[key as string] = target;
+  }
+}
+
+function validate(_: Object, key: string, descriptor: PropertyDescriptor) {
+  const originalFn = descriptor.value;
+  descriptor.value = function(...args: any[]) {
+
+    // 2. run the validators
+    const validatorList = validateMap[key];
+    if (validatorList) {
+      args.forEach((arg, index) => {
+        const validator = validatorList[index];
+
+        if (!validator) return;
+
+        const result = validator(arg);
+
+        if (!result) {
+          throw new Error(
+            `Failed for parameter: ${arg} of the index: ${index}`
+          );
+        }
+      });
+    }
+
+    // 3. run the original method
+    return originalFn.call(this, ...args);
+  }
+}
+
+const isInt = typedDecoratorFactory((x) => Number.isInteger(x));
+const isString = typedDecoratorFactory((x) => typeof x === 'string');
+
+class C {
+  @validate
+  sayRepeat(@isString word: string, @isInt x: number) {
+    return Array(x).fill(word).join('');
+  }
+}
+
+const c = new C();
+c.sayRepeat('hello', 2); // pass
+c.sayRepeat('', 'lol' as any); // throw an error
+```
+
+As this case shows,
+it is important for us to understand not only the evaluation order,
+but also the duty of different types of decorators.
+
+# Metadata
+
+Strictly speaking, metadata and decorator are two separate parts of EcmaScript.
+However, if you want to play with something like [reflection](https://en.wikipedia.org/wiki/Reflection_(computer_programming)),
+you always need both of them.
+
+Just look at our previous example, what if we don't want to write different types of validators?
+Is it possible to just write one validator which can **infer** the validators from the type annotation of the method?
+
+With the help of [reflect-metadata](https://github.com/rbuckton/reflect-metadata), 
+we can get the design-time types.
+
+```typescript
+import 'reflect-metadata';
+
+function validate(
+  target: Object,
+  key: string,
+  descriptor: PropertyDescriptor
+) {
+  const originalFn = descriptor.value;
+
+  // get the design type of the parameters
+  const designParamTypes = Reflect
+    .getMetadata('design:paramtypes', target, key);
+
+  descriptor.value = function (...args: any[]) {
+    args.forEach((arg, index) => {
+
+      const paramType = designParamTypes[index];
+
+      const result = arg.constructor === paramType
+        || arg instanceof paramType;
+
+      if (!result) {
+        throw new Error(
+          `Failed for validating parameter: ${arg} of the index: ${index}`
+        );
+      }
+    });
+
+    return originalFn.call(this, ...args);
+  }
+}
+
+class C {
+  @validate
+  sayRepeat(word: string, x: number) {
+    return Array(x).fill(word).join('');
+  }
+}
+
+const c = new C();
+c.sayRepeat('hello', 2); // pass
+c.sayRepeat('', 'lol' as any); // throw an error
+```
+
+For now, there are three types of design-time annotations we can get:
+
+* `design:type`: type of property.
+* `desin:paramtypes`: type of parameters of method.
+* `design:returntype`: type of return type of method.
+
+Results of this three types are constructor functions (such as `String` and `Number`).
+The rule is:
+
+* number -> `Number`
+* string -> `String`
+* boolean -> `Boolean`
+* void/null/never -> `undefined`
+* Array/Tuple -> `Array`
+* Class -> The constructor function of the class
+* Enum -> `Number` when pure number enum, or `Object`
+* Function -> `Function`
+* Rest is `Object`
