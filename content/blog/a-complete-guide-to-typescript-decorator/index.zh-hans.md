@@ -1,29 +1,29 @@
 ---
-title: A Complete Guide to TypeScript Decorator
-date: "2020-09-07T17:44:55.568Z"
-description: Decorators make your code leaner.
+title: TypeScript装饰器完全指南
+date: "2020-10-13T14:43:55.568Z"
+description: 用装饰器简化你的代码。
 ---
 
-Decorators make the world of TypeScript better.
-People use lots of libraries built based on this awesome feature,
-for example: [Angular](https://angular.io/) and [Nestjs](https://nestjs.com/).
-In this blog I would explore decorators with many details.
-I hope you can figure out when and how to use this powerful feature after read this blog.
+装饰器让TypeScript的世界更好。
+我们使用的许多库都基于这一强大特性构建,
+例如[Angular](https://angular.io/)和[Nestjs](https://nestjs.com/)。
+在这篇博客中我将介绍装饰器和它的许多细节。
+我希望在读完这篇文章后，你可以理解何时和如何使用这一强的的特性。
 
-# Overview
+# 概览
 
-Decorators are just functions in a particular form which can apply to:
-1. Class
-2. Class Property
-3. Class Method
-4. Class Accessor
-5. Class Method Parameter
+装饰器本质上是一种特殊的函数被应用在于：
+1. 类
+2. 类属性
+3. 类方法
+4. 类访问器
+5. 类方法的参数
 
-So, applying decorators is pretty like composing a chain of functions,
-pretty much like higher-order function or class.
-With decorators, we can easily implement [proxy pattern](https://en.wikipedia.org/wiki/Proxy_pattern) to reduce our code and do some cool things.
 
-The syntax of decorator is pretty simple, just add the `@` operator before the decorator you want to use, then the decorator will be applied to the target:
+所以应用装饰器其实很像是组合一系列函数，类似于高阶函数和类。
+通过装饰器我们可以轻松实现[代理模式](https://zh.wikipedia.org/zh-hans/代理模式)来使代码更简洁以及实现其它一些更有趣的能力。
+
+装饰器的语法十分简单，只需要在想使用的装饰器前加上`@`符号，装饰器就会被应用到目标上：
 
 ```typescript
 function simpleDecorator() {
@@ -34,37 +34,43 @@ function simpleDecorator() {
 class A {}
 ```
 
-There are 5 types of decorators we can use:
+一共有5种装饰器可被我们使用：
 
-1. Class Decorators
-2. Property Decorators
-3. Method Decorators
-4. Accessor Decorators
-5. Parameter Decorators
+1. 类装饰器
+2. 属性装饰器
+3. 方法装饰器
+4. 访问器装饰器
+5. 参数装饰器
 
-We can take a quick overview for all the 5 decorators:
+让我们来快速认识一下这五种装饰器：
 
 ```typescript
+// 类装饰器
 @classDecorator
 class Bird {
+
+  // 属性装饰器
   @propertyDecorator
   name: string;
   
+  // 方法装饰器
   @methodDecorator
   fly(
+    // 参数装饰器
     @parameterDecorator
       meters: number
   ) {}
   
+  // 访问器装饰器
   @accessorDecorator
   get egg() {}
 }
 ```
 
-# Evaluation
+# 执行
 
-## Timing
-Decorators evaluate only one time when apply. For example:
+## 时机
+装饰器只在解释执行时应用一次，例如：
 
 ```typescript
 function f(C) {
@@ -78,19 +84,19 @@ class A {}
 // output: apply decorator
 ```
 
-This code will log `apply decorator` in terminal, even though we didn't use the class A.
+这里的代码会在终端中打印`apply decorator`，即便我们其实并没有使用类A。
 
-## Order of Evaluation
-The composition order of different types of decorators is well-defined:
+## 执行顺序
+不同类型的装饰器的执行顺序是明确定义的：
 
-1. Instance Member:  
-Parameter Decorators -> Method / Accessor / Property Decorators
-2. Static Member:  
-Parameter Decorators -> Method / Accessor / Property Decorators
-3. Constructor: Parameter Decorators
-4. Class Decorators
+1. 实例成员：
+参数装饰器 -> 方法 / 访问器 / 属性 装饰器
+2. 静态成员:  
+参数装饰器 -> 方法 / 访问器 / 属性 装饰器
+3. 构造器: 参数装饰器
+4. 类装饰器
 
-For example, consider the following code:
+例如，考虑以下代码：
 
 ```typescript
 function f(key: string): any {
@@ -118,7 +124,7 @@ class C {
 }
 ```
 
-The code above will print the following messages:
+它将会打印出以下信息：
 
 ```bash
 evaluate:  Instance Method
@@ -139,14 +145,12 @@ call:  Constructor Parameter
 call:  Class Decorator
 ```
 
-You may notice that the evaluation of instance property is later than the instance method,
-however the evaluation of static property is earlier than the static method.
-This is because the evaluation order of property/accessor/method decorators
-is depends on their order of appearance in code.
+你也许会注意到执行实例属性`prop`晚于实例方法`method`
+然而执行静态属性`static prop`早于静态方法`static method`。
+这是因为对于属性/方法/访问器装饰器而言，执行顺序取决于声明它们的顺序。
 
-However,
-the order of evaluation for different parameters within the same method or constructor is opposite,
-the last parameter decorator will be called first:
+然而，同一方法中不同参数的装饰器的执行顺序是相反的，
+最后一个参数的装饰器会最先被执行：
 
 ```typescript
 function f(key: string): any {
@@ -164,7 +168,7 @@ class C {
 }
 ```
 
-The code above will print the following messages:
+这里的代码打印出的结果为：
 
 ```bash
 evaluate:  Parameter Foo
@@ -173,16 +177,16 @@ call:  Parameter Bar
 call:  Parameter Foo
 ```
 
-## Composition of Multiple Decorators
+## 多个装饰器的组合
 
-You can apply multiple decorators to a single target. The order of the decorators composed is:
+你可以对同一目标应用多个装饰器。它们的组合顺序为：
 
-1. Outer Decorator Evaluate
-2. Inner Decorator Evaluate
-3. Inner Decorator Call
-4. Outer Decorator Call
+1. 求值外层装饰器
+2. 求值内层装饰器
+3. 调用内层装饰器
+4. 调用外层装饰器
 
-For example:
+例如:
 
 ```typescript
 function f(key: string) {
@@ -199,7 +203,7 @@ class C {
 }
 ```
 
-The code above will print the following messages:
+这里的代码打印出的结果为：
 
 ```bash
 evaluate: Outer Method
@@ -208,25 +212,24 @@ call: Inner Method
 call: Outer Method
 ```
 
-# Definition
+# 定义
 
-## Class Decorators
+## 类装饰器
 
-Type annotation:
+类型声明：
 ```typescript
 type ClassDecorator = <TFunction extends Function>
   (target: TFunction) => TFunction | void;
 ```
 
-* @Params:
-  1. `target`: The constructor of the class.
-* @Returns:  
-  If the class decorator returns a value, it will replace the class declaration.
+* @参数:
+  1. `target`: 类的构造器。
+* @返回:  
+  如果类装饰器返回了一个值，她将会被用来代替原有的类构造器的声明。
   
-Thus, it's suitable for extending an existing class with some properties or methods.
+因此，类装饰器适合用于继承一个现有类并添加一些属性和方法。
 
-For example, we can add a `toString` method for all
-the classes to overwrite the original `toString` method.
+例如我们可以添加一个`toString`方法给所有的类来覆盖它原有的`toString`方法。
 
 ```typescript
 type Consturctor = { new (...args: any[]): any };
@@ -249,7 +252,7 @@ console.log(new C().toString())
 // -> {"foo":"foo","num":24}
 ```
 
-It is a pity that we cannot define type-safe decorators, which means:
+遗憾的是装饰器并没有类型保护，这意味着：
 
 ```typescript
 declare function Blah<T>(target: T): T & {foo: number}
@@ -264,8 +267,8 @@ class Foo {
 new Foo().foo; // Property 'foo' does not exist on type 'Foo'
 ```
 
-This is [a well-known issue](https://github.com/microsoft/TypeScript/issues/4881) in typescript.
-What we can do for now is to provide a class with type information to be extended by the target class:
+这是[一个TypeScript的已知的缺陷](https://github.com/microsoft/TypeScript/issues/4881)。
+目前我们能做的只有额外提供一个类用于提供类型信息：
 
 ```typescript
 declare function Blah<T>(target: T): T & {foo: number}
@@ -284,24 +287,22 @@ class Foo extends Base {
 new Foo().foo;
 ```
 
-## Property Decorators
+## 属性装饰器
 
-Type annotation:
+类型声明：
 ```typescript
 type PropertyDecorator =
   (target: Object, propertyKey: string | symbol) => void;
 ```
 
-* @Params:
-  1. `target`: Either the constructor function of the class for a static member,
-  or the prototype of the class for an instance member.
-  2. `propertyKey`: The name of the property.
-* @Returns:  
-  The return value will be ignored.
+* @参数:
+  1. `target`: 对于静态成员来说是类的构造器，对于实例成员来说是类的原型链。
+  2. `propertyKey`: 属性的名称。
+* @返回:  
+  返回的结果将被忽略。
 
-Except being used to collect information,
-property decorators can also be used to add some methods or property to the class.
-For example, we can write a decorator to add the ability to listen changes on some properties.
+除了用于收集信息外，属性装饰器也可以用来给类添加额外的方法和属性。
+例如我们可以写一个装饰器来给某些属性添加监听器。
 
 ```typescript
 function capitalizeFirstLetter(str: string) {
@@ -342,9 +343,9 @@ c.foo = -3.14; // -> prev: 100, next: -3.14
 c.bar = "baz"; // -> prev: bar, next: baz
 c.bar = "sing"; // -> prev: baz, next: sing
 ```
-## Method Decorators
+## 方法装饰器
 
-Type annotation:
+类型声明：
 ```typescript
 type MethodDecorator = <T>(
   target: Object,
@@ -353,17 +354,16 @@ type MethodDecorator = <T>(
 ) => TypedPropertyDescriptor<T> | void;
 ```
 
-* @Params:
-  1. `target`: Either the constructor function of the class for a static member,
-  or the prototype of the class for an instance member.
-  2. `propertyKey`: The name of the property.
-  3. `descriptor`: The property [descriptor](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/getOwnPropertyDescriptor) for the member;
-* @Returns:  
-  If returns a value, it will be used as the descriptor of the member.
+* @参数：
+  1. `target`: 对于静态成员来说是类的构造器，对于实例成员来说是类的原型链。
+  2. `propertyKey`: 属性的名称。
+  3. `descriptor`: 属性的[描述器](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/getOwnPropertyDescriptor)。
+* @返回：
+  如果返回了值，它会被用于替代属性的描述器。
 
-What makes method decorators different from property decorators is the `descriptor` parameter.
-By which can `hack` the original implementation and inject some common logic.
-For example, we can add logger for some method to log out the input and output:
+方法装饰器不同于属性装饰器的地方在于`descriptor`参数。
+通过这个参数我们可以修改方法原本的实现，添加一些共用逻辑。
+例如我们可以给一些方法添加打印输入与输出的能力：
 
 ```typescript
 function logger(target: any, propertyKey: string, descriptor: PropertyDescriptor) {
@@ -390,25 +390,25 @@ c.add(1, 2);
 // -> result: 3
 ```
 
-## Accessor Decorators
+## 访问器装饰器
 
-Accessor decorators are generally the same as method decorators, the only difference are the keys in the descriptor:
+访问器装饰器总体上讲和方法装饰器很接近，唯一的区别在于描述器中有的key不同：
 
-Descriptor in a method decorator has keys:
+方法装饰器的描述器的key为：
 
 * `value`
 * `writable`
 * `enumerable`
 * `configurable`
 
-Descriptor in an accessor decorator has keys:
+访问器装饰器的描述器的key为：
 
 * `get`
 * `set`
 * `enumerable`
 * `configurable`
 
-For example, we can make the property immutable by a decorator:
+例如，我们可以将某个属性设为不可变值：
 
 ```typescript
 function immutable(target: any, propertyKey: string, descriptor: PropertyDescriptor) {
@@ -440,9 +440,9 @@ console.log(c.point === point)
 // -> false
 ```
 
-## Parameter Decorators
+## 参数装饰器
 
-Type annotation:
+类型声明：
 ```typescript
 type ParameterDecorator = (
   target: Object,
@@ -451,34 +451,28 @@ type ParameterDecorator = (
 ) => void;
 ```
 
-* @Params:
-  1. `target`: Either the constructor function of the class for a static member,
-  or the prototype of the class for an instance member.
-  2. `propertyKey`: The name of the property (Name of the method, not the parameter).
-  3. `parameterIndex`: The ordinal index of the parameter in the function’s parameter list.
-* @Returns:  
-  The return value will be ignored.
+* @参数：
+  1. `target`: 对于静态成员来说是类的构造器，对于实例成员来说是类的原型链。
+  2. `propertyKey`: 属性的名称(注意是方法的名称，而不是参数的名称)。
+  3. `parameterIndex`: 参数在方法中所处的位置的下标。
+* @返回：  
+  返回的值将会被忽略。
 
-A standalone parameter decorator can do few things,
-it's always be used to record information which can be used by other decorators.
+单独的参数装饰器能做的事情很有限，它一般都被用于记录可被其它装饰器使用的信息。
   
-# Combination
+# 结合
 
-For some complex cases,
-we may need to use different types of decorators together.
-For instance,
-if we want to add not only static type checker,
-but also run-time type checker for our api.
+对于一些复杂场景，
+我们可能需要结合使用不同的装饰器。
+例如如果我们不仅想给我们的接口添加静态检查，还想加上运行时检查的能力。
 
-There are 3 steps to implement the feature:
+我们可以用3个步骤来实现这个功能：
 
-1. Mark the parameters needed to be validated
-(since the parameter decorators evaluate before the method decorators).
-2. Change the value of descriptor of the method,
-run the parameter validators before the method, throw error if failed.
-3. Run the original method.
+1. 标记需要检查的参数 (因为参数装饰器先于方法装饰器执行)。
+2. 改变方法的`descriptor`的`value`的值，先运行参数检查器，如果失败就抛出异常。
+3. 运行原有的接口实现。
 
-Here is the code:
+以下是代码:
 
 ```typescript
 type Validator = (x: any) => boolean;
@@ -486,7 +480,7 @@ type Validator = (x: any) => boolean;
 // save the marks
 const validateMap: Record<string, Validator[]> = {};
 
-// 1. mark the parameters need to be validated
+// 1. 标记需要检查的参数
 function typedDecoratorFactory(validator: Validator): ParameterDecorator {
   return (_, key, index) => {
     const target = validateMap[key as string] ?? [];
@@ -499,7 +493,7 @@ function validate(_: Object, key: string, descriptor: PropertyDescriptor) {
   const originalFn = descriptor.value;
   descriptor.value = function(...args: any[]) {
 
-    // 2. run the validators
+    // 2. 运行检查器
     const validatorList = validateMap[key];
     if (validatorList) {
       args.forEach((arg, index) => {
@@ -517,7 +511,7 @@ function validate(_: Object, key: string, descriptor: PropertyDescriptor) {
       });
     }
 
-    // 3. run the original method
+    // 3. 运行原有的方法
     return originalFn.call(this, ...args);
   }
 }
@@ -537,21 +531,19 @@ c.sayRepeat('hello', 2); // pass
 c.sayRepeat('', 'lol' as any); // throw an error
 ```
 
-As this case shows,
-it is important for us to understand not only the evaluation order,
-but also the duty of different types of decorators.
+正如例子中展示的，
+对我们来说同时理解不同种类装饰器的执行顺序和职责都很重要。
 
-# Metadata
+# 元数据
 
-Strictly speaking, metadata and decorator are two separate parts of EcmaScript.
-However, if you want to play with something like [reflection](https://en.wikipedia.org/wiki/Reflection_(computer_programming)),
-you always need both of them.
+严格地说，元数据和装饰器是EcmaScript中两个独立的部分。
+然而，如果你想实现像是[反射](https://zh.wikipedia.org/wiki/反射_(计算机科学))这样的能力，你总是同时需要它们。
 
-Just look at our previous example, what if we don't want to write different types of validators?
-Is it possible to just write one validator which can **infer** the validators from the type annotation of the method?
+如果我们回顾上一个例子，如果我们不想写各种不同的检查器呢？
+或者说，能否只写一个检查器能够通过我们编写的TS类型声明来自动运行类型检查？
 
-With the help of [reflect-metadata](https://github.com/rbuckton/reflect-metadata), 
-we can get the design-time types.
+有了[reflect-metadata](https://github.com/rbuckton/reflect-metadata)的帮助，
+我们可以获取编译期的类型。 
 
 ```typescript
 import 'reflect-metadata';
@@ -563,7 +555,7 @@ function validate(
 ) {
   const originalFn = descriptor.value;
 
-  // get the design type of the parameters
+  // 获取参数的编译期类型
   const designParamTypes = Reflect
     .getMetadata('design:paramtypes', target, key);
 
@@ -598,39 +590,37 @@ c.sayRepeat('hello', 2); // pass
 c.sayRepeat('', 'lol' as any); // throw an error
 ```
 
-For now, there are three types of design-time annotations we can get:
+目前为止一共有三种编译期类型可以拿到：
 
-* `design:type`: type of property.
-* `desin:paramtypes`: type of parameters of method.
-* `design:returntype`: type of return type of method.
+* `design:type`: 属性的类型。
+* `desin:paramtypes`: 方法的参数的类型。
+* `design:returntype`: 方法的返回值的类型。
 
-Results of this three types are constructor functions (such as `String` and `Number`).
-The rule is:
+这三种方式拿到的结果都是构造函数（例如`String`和`Number`）。规则是：
 
 * number -> `Number`
 * string -> `String`
 * boolean -> `Boolean`
 * void/null/never -> `undefined`
 * Array/Tuple -> `Array`
-* Class -> The constructor function of the class
-* Enum -> `Number` when pure number enum, or `Object`
+* Class -> 类的构造函数
+* Enum -> 如果是纯数字枚举则为`Number`, 否则是 `Object`
 * Function -> `Function`
-* Rest is `Object`
+* 其余都是`Object`
 
-# When to Use?
+# 何时使用？
 
-Now we can make a conclusion of when to use decorators,
-you may have felt about this when reading the code above.
+现在我们可以对于何时使用装饰器得出结论，
+在阅读上面的代码中你可能也有所感觉。
 
-I would like to list some use cases:
+我将例举一些常用的使用场景：
 
-* Before/After hooks.
-* Watch property changes and method calls.
-* Transform parameters.
-* Add extra methods or properties.
-* Runtime type validation.
-* Auto serialization and deserialization.
-* Dependency Injection.
+* Before/After钩子。
+* 监听属性改变或者方法调用。
+* 对方法的参数做转换。
+* 添加额外的方法和属性。
+* 运行时类型检查。
+* 自动编解码。
+* 依赖注入。
 
-I hope that you can figure out more cases
-and use decorators to simplify code after read this blog.
+我希望读完这篇文章后，你可以找到装饰器的更多使用场景，并且用它来简化你的代码。
