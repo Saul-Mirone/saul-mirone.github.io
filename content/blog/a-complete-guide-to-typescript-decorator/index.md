@@ -92,10 +92,12 @@ Parameter Decorators -> Method / Accessor / Property Decorators
 
 For example, consider the following code:
 
-``` typescript
-function f(key: string) {
-  console.log(key);
-  return function () {};
+```typescript
+function f(key: string): any {
+  console.log("evaluate: ", key);
+  return function () {
+    console.log("call: ", key);
+  };
 }
 
 @f("Class Decorator")
@@ -119,26 +121,39 @@ class C {
 The code above will print the following messages:
 
 ```bash
-Instance Method
-Instance Method Parameter
-Instance Property
-Static Property
-Static Method
-Static Method Parameter
-Class Decorator
-Constructor Parameter
+evaluate:  Instance Method
+evaluate:  Instance Method Parameter
+call:  Instance Method Parameter
+call:  Instance Method
+evaluate:  Instance Property
+call:  Instance Property
+evaluate:  Static Property
+call:  Static Property
+evaluate:  Static Method
+evaluate:  Static Method Parameter
+call:  Static Method Parameter
+call:  Static Method
+evaluate:  Class Decorator
+evaluate:  Constructor Parameter
+call:  Constructor Parameter
+call:  Class Decorator
 ```
 
 You may notice that the evaluation of instance property is later than the instance method,
 however the evaluation of static property is earlier than the static method.
 This is because the evaluation order of property/accessor/method decorators
 is depends on their order of appearance in code.
-What's more, we can infer the order of evaluation for different parameters within the same method or constructor:
+
+However,
+the order of evaluation for different parameters within the same method or constructor is opposite,
+the last parameter decorator will be called first:
 
 ```typescript
-function f(key: string) {
-  console.log(key);
-  return function () {};
+function f(key: string): any {
+  console.log("evaluate: ", key);
+  return function () {
+    console.log("call: ", key);
+  };
 }
 
 class C {
@@ -152,8 +167,10 @@ class C {
 The code above will print the following messages:
 
 ```bash
-Parameter Foo
-Parameter Bar
+evaluate:  Parameter Foo
+evaluate:  Parameter Bar
+call:  Parameter Bar
+call:  Parameter Foo
 ```
 
 ## Composition of Multiple Decorators
