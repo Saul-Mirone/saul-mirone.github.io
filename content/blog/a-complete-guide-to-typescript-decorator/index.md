@@ -186,9 +186,9 @@ For example:
 
 ```typescript
 function f(key: string) {
-  console.log(`${key}: evaluated`);
+  console.log("evaluate: ", key);
   return function () {
-    console.log(`${key}: called`);
+    console.log("call: ", key);
   };
 }
 
@@ -202,13 +202,13 @@ class C {
 The code above will print the following messages:
 
 ```bash
-Outer Method: evaluated
-Inner Method: evaluated
-Inner Method: called
-Outer Method: called
+evaluate: Outer Method
+evaluate: Inner Method
+call: Inner Method
+call: Outer Method
 ```
 
-# Basic
+# Definition
 
 ## Class Decorators
 
@@ -616,3 +616,22 @@ The rule is:
 * Enum -> `Number` when pure number enum, or `Object`
 * Function -> `Function`
 * Rest is `Object`
+
+# When to Use?
+
+Now we can make a conclusion of when to use decorators,
+you may have felt about this when reading the code above.
+
+I would like to list some use cases:
+
+* Before/After hooks.
+* Watch property changes and method calls.
+* Transform parameters.
+* Add extra methods or properties.
+* Runtime type validation.
+* Auto serialization and deserialization.
+* Inject dependencies.
+* Dependency Injection.
+
+I hope that you can figure out your cases
+and use decorators to simplify code after read this blog.
