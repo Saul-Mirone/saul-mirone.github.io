@@ -1,5 +1,5 @@
 ---
-title: A Complete Guide to TypeScript Decorator
+title: A Complete Guide to TypeScript Decorators
 date: "2020-09-07T17:44:55.568Z"
 description: Decorators make your code leaner.
 ---
