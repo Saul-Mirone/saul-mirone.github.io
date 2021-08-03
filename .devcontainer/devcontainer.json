@@ -9,7 +9,14 @@
 	},
 
 	// Set *default* container specific settings.json values on container create.
-	"settings": {},
+	"settings": {
+		"terminal.integrated.profiles.linux": {
+			"zsh (login)": {
+				"path": "zsh",
+				"args": ["-l"]
+			}
+		}
+    },
 
 	// Add the IDs of extensions you want installed when the container is created.
 	"extensions": [

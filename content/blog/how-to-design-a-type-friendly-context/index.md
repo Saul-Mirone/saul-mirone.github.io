@@ -179,7 +179,7 @@ ctx1.get(num); // => 1
 ctx2.get(num); // => still 0
 ```
 
-Now we have built a type friendly context with IoC,
+Now we have built a type friendly context using IoC,
 with slices that can be shared between context,
 but values will be isolated.
 
