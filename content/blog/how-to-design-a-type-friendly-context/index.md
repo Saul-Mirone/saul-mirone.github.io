@@ -4,14 +4,14 @@ date: "2021-08-03T12:29:40.790Z"
 description: IoC is the key.
 ---
 
-# Context in JavaScript
-
 In the world of JavaScript, [Koa](https://koajs.com/) is a milestone.
 Although [sinatra](http://sinatrarb.com/) is born before it,
 Koa makes it really popular that apps should built by a simple core to load plugins,
 and bundles of plugins to implement unique features.
 Today lots of apps are built with this pattern.
 For example, [vscode](https://code.visualstudio.com/) and [webpack](https://webpack.js.org/).
+
+# Context in JavaScript
 
 In the world of Koa, `ctx` is a magic box :crystal_ball:.
 Users can get all sorts of properties on it.
