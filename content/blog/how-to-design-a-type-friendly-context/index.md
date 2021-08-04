@@ -73,7 +73,7 @@ const ctx = createCtx();
 const numberSlice = createSlice(0);
 
 // inject a ctx.
-ctx.inject(slice);
+ctx.inject(numberSlice);
 
 const number = ctx.get(numberSlice); // -> 0
 
@@ -156,7 +156,7 @@ const createCtx = () => {
 ```
 We use a simple [Map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map) as the container of slices, with the `symbol` as key so the slices will not be conflict between each other.
 
-# Test
+# Testing
 
 Now our context has been done, let's do some test:
 
@@ -185,11 +185,82 @@ but values will be isolated.
 
 ---
 
-View full code on [code sandbox](https://codesandbox.io/s/infallible-haibt-ftr93?file=/src/index.ts:1296-1374):
+# Full Code
 
-<iframe src="https://codesandbox.io/embed/context-and-slice-ftr93?fontsize=14&moduleview=1&hidenavigation=1&module=%2Fsrc%2Findex.ts&theme=dark&view=editor"
-    style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;"
-    title="context-and-slice"
-    allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
-    sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
-></iframe>
+```typescript
+type Ctx = Map<symbol, Slice>;
+
+type Slice<T = unknown> = {
+  id: symbol;
+  set: (value: T) => void;
+  get: () => T;
+};
+
+type Metadata<T> = {
+  id: symbol;
+  (ctx: Ctx): Slice<T>;
+};
+
+const createSlice = <T>(defaultValue: T): Metadata<T> => {
+  const id = Symbol("Slice");
+
+  const metadata = (ctx: Ctx) => {
+    let inner = defaultValue;
+    const slice: Slice<T> = {
+      id,
+      set: (next) => {
+        inner = next;
+      },
+      get: () => inner
+    };
+    ctx.set(id, slice as Slice);
+    return slice;
+  };
+  metadata.id = id;
+
+  return metadata;
+};
+
+const createCtx = () => {
+  const map: Ctx = new Map();
+
+  const getSlice = <T>(metadata: Metadata<T>): Slice<T> => {
+    const value = map.get(metadata.id);
+    if (!value) {
+      throw new Error("Slice not injected");
+    }
+    return value as Slice<T>;
+  };
+
+  return {
+    inject: <T>(metadata: Metadata<T>) => metadata(map),
+    get: <T>(metadata: Metadata<T>): T => getSlice(metadata).get(),
+    set: <T>(metadata: Metadata<T>, value: T): void => {
+      getSlice(metadata).set(value);
+    }
+  };
+};
+```
+
+Testing:
+
+```typescript
+const num = createSlice(0);
+const ctx1 = createCtx();
+const ctx2 = createCtx();
+
+ctx1.inject(num);
+ctx2.inject(num);
+
+const values = [];
+
+const x = ctx1.get(num);
+values.push(x);
+
+ctx1.set(num, x + 1);
+
+values.push(ctx1.get(num));
+values.push(ctx2.get(num));
+
+expect(values).toEqual([0, 1, 0]);
+```
