@@ -16,6 +16,8 @@ jobs:
             node-version: 15.x
       - name: install pnpm
         run: npm i pnpm@latest -g
+      - name: install deps
+        run: pnpm install
       - name: build
         run: pnpm build
       - name: deploy to pages
