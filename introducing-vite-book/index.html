@@ -19,9 +19,9 @@ It’s built on top of the <a href="https://vitejs.dev/">vite</a> ecosystem. So 
 <div class="gatsby-highlight" data-language="javascript"><pre class="language-javascript"><code class="language-javascript"><span class="token comment">// vite.config.js</span>
 <span class="token keyword">import</span> <span class="token punctuation">{</span> book <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'vite-plugin-book/vite'</span><span class="token punctuation">;</span>
 
-<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token function">defineConfig</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
     <span class="token literal-property property">plugins</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token function">book</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
-<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre></div>
+<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <p>After that, you can just run <code class="language-text">npm run dev</code>, and you’ll see the following message in terminal:</p>
 <div class="gatsby-highlight" data-language="bash"><pre class="language-bash"><code class="language-bash">vite dev server running at:
 
@@ -61,6 +61,8 @@ ready <span class="token keyword">in</span> XXXms.
 <div class="gatsby-highlight" data-language="bash"><pre class="language-bash"><code class="language-bash"><span class="token function">npm</span> run dev
 <span class="token function">npm</span> run preview</code></pre></div>
 <p><strong>In production, the book will be readonly. Editing the book is only possible in development mode</strong>.</p>
+<h2>Online playground</h2>
+<p>You can play with it on <a href="https://stackblitz.com/edit/vitejs-vite-7u4cxt?file=package.json">stackblitz</a></p>
 <h2>Summary</h2>
 <p>For now, you’ve already get a book which you can:</p>
 <ol>
