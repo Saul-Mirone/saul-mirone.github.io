@@ -10,7 +10,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
-      - uses: enriikke/gatsby-gh-pages-action@v2
+      - name: setup node.js
+        uses: actions/setup-node@v2
         with:
-          deploy-branch: gh-pages
-          access-token: ${{ secrets.ACCESS_TOKEN }}
+            node-version: 15.x
+      - name: install pnpm
+        run: npm i pnpm@latest -g
+      - name: build
+        run: pnpm build
+      - name: deploy to pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+            github_token: ${{ secrets.GITHUB_TOKEN }}
+            publish_dir: public
