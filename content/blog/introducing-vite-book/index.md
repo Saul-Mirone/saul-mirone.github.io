@@ -35,9 +35,9 @@ Then, open the `vite.config.js` and add the plugin:
 // vite.config.js
 import { book } from 'vite-plugin-book/vite';
 
-export default defineConfig({
+export default {
     plugins: [book()],
-});
+};
 ```
 
 After that, you can just run `npm run dev`, and you'll see the following message in terminal:
@@ -105,6 +105,10 @@ npm run preview
 ```
 
 **In production, the book will be readonly. Editing the book is only possible in development mode**.
+
+## Online playground
+
+You can play with it on [stackblitz](https://stackblitz.com/edit/vitejs-vite-7u4cxt?file=package.json)
 
 ## Summary
 
