@@ -1,4 +1,91 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Saul Mirone's Disenchanted Blog RSS Feed]]></title><description><![CDATA[Personal blog by Saul Mirone]]></description><link>https://saul-mirone.github.io</link><generator>GatsbyJS</generator><lastBuildDate>Fri, 04 Feb 2022 04:08:06 GMT</lastBuildDate><item><title><![CDATA[How to Design a Type Friendly Context]]></title><description><![CDATA[IoC is the key.]]></description><link>https://saul-mirone.github.io/how-to-design-a-type-friendly-context/</link><guid isPermaLink="false">https://saul-mirone.github.io/how-to-design-a-type-friendly-context/</guid><pubDate>Tue, 03 Aug 2021 12:29:40 GMT</pubDate><content:encoded>&lt;p&gt;In the world of JavaScript, &lt;a href=&quot;https://koajs.com/&quot;&gt;Koa&lt;/a&gt; is a milestone.
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Saul Mirone's Disenchanted Blog RSS Feed]]></title><description><![CDATA[Personal blog by Saul Mirone]]></description><link>https://saul-mirone.github.io</link><generator>GatsbyJS</generator><lastBuildDate>Fri, 04 Feb 2022 05:08:53 GMT</lastBuildDate><item><title><![CDATA[Introducing Vite Book]]></title><description><![CDATA[A new way to write and manage your documentation.]]></description><link>https://saul-mirone.github.io/introducing-vite-book/</link><guid isPermaLink="false">https://saul-mirone.github.io/introducing-vite-book/</guid><pubDate>Fri, 04 Feb 2022 12:14:55 GMT</pubDate><content:encoded>&lt;h2&gt;Motivation&lt;/h2&gt;
+&lt;p&gt;In the past few years, I tried lots of documentation generators, such as &lt;a href=&quot;https://docsify.js.org/&quot;&gt;docsify&lt;/a&gt;, &lt;a href=&quot;https://docusaurus.io/&quot;&gt;docusaurus&lt;/a&gt;, &lt;a href=&quot;https://github.com/doczjs/docz&quot;&gt;docz&lt;/a&gt;, etc… But I couldn’t find a good one that I liked for following reasons:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;I have to switch between my markdown editor and the browser many times during writing docs to make sure they looks good. Which is really annoying when I only have one screen with me.&lt;/li&gt;
+&lt;li&gt;Sometimes I don’t want to do so much configuration to just create a documentation site. For example, when creating a library. I just want my documentation site to be simple to setup and easy to write.&lt;/li&gt;
+&lt;li&gt;Markdown based documentation may block people that don’t know how to use markdown. It’s not common in programmers, but what about designers and PM? If they also want to contribute to the docs, they have to learn it first.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2&gt;Introducing Vite Book&lt;/h2&gt;
+&lt;p&gt;So I created a new way to write and manage your documentation. It’s called &lt;a href=&quot;https://github.com/Saul-Mirone/vite-plugin-book&quot;&gt;Vite Book&lt;/a&gt;.
+It’s built on top of the &lt;a href=&quot;https://vitejs.dev/&quot;&gt;vite&lt;/a&gt; ecosystem. So you can use it as a vite plugin in your project.&lt;/p&gt;
+&lt;h3&gt;Quick Start&lt;/h3&gt;
+&lt;p&gt;Init a project using vite and add the &lt;a href=&quot;https://www.npmjs.com/package/vite-plugin-book&quot;&gt;vite-plugin-book&lt;/a&gt; package as the dependency:&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;bash&quot;&gt;&lt;pre class=&quot;language-bash&quot;&gt;&lt;code class=&quot;language-bash&quot;&gt;&lt;span class=&quot;token function&quot;&gt;npm&lt;/span&gt; init vite@latest my-vite-book -- --template vanilla
+
+&lt;span class=&quot;token builtin class-name&quot;&gt;cd&lt;/span&gt; my-vite-book
+
+&lt;span class=&quot;token function&quot;&gt;npm&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;install&lt;/span&gt; --save vite-plugin-book&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Then, open the &lt;code class=&quot;language-text&quot;&gt;vite.config.js&lt;/code&gt; and add the plugin:&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;javascript&quot;&gt;&lt;pre class=&quot;language-javascript&quot;&gt;&lt;code class=&quot;language-javascript&quot;&gt;&lt;span class=&quot;token comment&quot;&gt;// vite.config.js&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; book &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;vite-plugin-book/vite&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;token keyword&quot;&gt;export&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;default&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;defineConfig&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;token literal-property property&quot;&gt;plugins&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;book&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;After that, you can just run &lt;code class=&quot;language-text&quot;&gt;npm run dev&lt;/code&gt;, and you’ll see the following message in terminal:&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;bash&quot;&gt;&lt;pre class=&quot;language-bash&quot;&gt;&lt;code class=&quot;language-bash&quot;&gt;vite dev server running at:
+
+&lt;span class=&quot;token operator&quot;&gt;&gt;&lt;/span&gt; Local: http://localhost:3000/
+&lt;span class=&quot;token operator&quot;&gt;&gt;&lt;/span&gt; Network: use &lt;span class=&quot;token variable&quot;&gt;&lt;span class=&quot;token variable&quot;&gt;`&lt;/span&gt;--host&lt;span class=&quot;token variable&quot;&gt;`&lt;/span&gt;&lt;/span&gt; to expose
+
+ready &lt;span class=&quot;token keyword&quot;&gt;in&lt;/span&gt; XXXms.
+
+&lt;span class=&quot;token operator&quot;&gt;&gt;&lt;/span&gt; Book Admin: http://localhost:3000/__vite_plugin_book__/
+&lt;span class=&quot;token operator&quot;&gt;&gt;&lt;/span&gt; Book Preview: http://localhost:3000/__vite_plugin_book__/__preview__/&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Now you can view the book admin to play with your book!&lt;/p&gt;
+&lt;h3&gt;Overview&lt;/h3&gt;
+&lt;h4&gt;Create a new page:&lt;/h4&gt;
+&lt;p&gt;&lt;img src=&quot;https://saul-mirone.github.io/63aa95fb4509c0fcc139bb44e042ef8e/new-page.gif&quot; alt=&quot;new page&quot;&gt;&lt;/p&gt;
+&lt;h4&gt;Create a new menu:&lt;/h4&gt;
+&lt;p&gt;&lt;img src=&quot;https://saul-mirone.github.io/2c0c79896671c3d496502d3867a8d9d1/new-menu.gif&quot; alt=&quot;new menu&quot;&gt;&lt;/p&gt;
+&lt;h4&gt;Drag and drop to sort:&lt;/h4&gt;
+&lt;p&gt;&lt;img src=&quot;https://saul-mirone.github.io/3093e2e7b02b5e74a52fc61f4b40296a/dnd.gif&quot; alt=&quot;dnd&quot;&gt;&lt;/p&gt;
+&lt;h4&gt;Delete items:&lt;/h4&gt;
+&lt;p&gt;&lt;img src=&quot;https://saul-mirone.github.io/c7c71362704bf2ccd4a0b83db8d740ad/delete.gif&quot; alt=&quot;delete&quot;&gt;&lt;/p&gt;
+&lt;h4&gt;More User Interfaces:&lt;/h4&gt;
+&lt;p&gt;&lt;img src=&quot;https://saul-mirone.github.io/0de0187edbd5faefcf5a61af6efd4ce9/ux.gif&quot; alt=&quot;ux&quot;&gt;&lt;/p&gt;
+&lt;h3&gt;Deployment&lt;/h3&gt;
+&lt;p&gt;You can also make your book available to the public.&lt;/p&gt;
+&lt;p&gt;Add following code to your &lt;code class=&quot;language-text&quot;&gt;main.js&lt;/code&gt;:&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;javascript&quot;&gt;&lt;pre class=&quot;language-javascript&quot;&gt;&lt;code class=&quot;language-javascript&quot;&gt;&lt;span class=&quot;token comment&quot;&gt;// Don&apos;t forget to import css!&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;vite-plugin-book/style.css&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;token keyword&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; renderBook &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;vite-plugin-book&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;token function&quot;&gt;renderBook&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;token literal-property property&quot;&gt;isProd&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;import&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;meta&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;env&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token constant&quot;&gt;PROD&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;token literal-property property&quot;&gt;baseUrl&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;import&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;meta&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;env&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token constant&quot;&gt;BASE_URL&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;token literal-property property&quot;&gt;container&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;#app&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Then, you can observe the book in production with:&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;bash&quot;&gt;&lt;pre class=&quot;language-bash&quot;&gt;&lt;code class=&quot;language-bash&quot;&gt;&lt;span class=&quot;token function&quot;&gt;npm&lt;/span&gt; run dev
+&lt;span class=&quot;token function&quot;&gt;npm&lt;/span&gt; run preview&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;strong&gt;In production, the book will be readonly. Editing the book is only possible in development mode&lt;/strong&gt;.&lt;/p&gt;
+&lt;h2&gt;Summary&lt;/h2&gt;
+&lt;p&gt;For now, you’ve already get a book which you can:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Write and manage documents just in browser.&lt;/li&gt;
+&lt;li&gt;Ready for deployment.&lt;/li&gt;
+&lt;li&gt;Have mobile support, sidebar, dark mode, loading status, share, etc… out of the box.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2&gt;What’s next?&lt;/h2&gt;
+&lt;p&gt;I’ll continue work on this library to make it support more features. The following features are planned:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;plugin system&lt;/li&gt;
+&lt;li&gt;theme system&lt;/li&gt;
+&lt;li&gt;configurable editor&lt;/li&gt;
+&lt;li&gt;i18n&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Support Me&lt;/h2&gt;
+&lt;p&gt;If you like this idea, please consider to give it a &lt;img class=&quot;emoji&quot; draggable=&quot;false&quot; alt=&quot;⭐️&quot; src=&quot;https://twemoji.maxcdn.com/2/72x72/2b50.png&quot; style=&quot;height: 1em; width: 1em; margin: 0 .05em 0 .1em; vertical-align: -0.1em;&quot;&gt; on &lt;a href=&quot;https://github.com/Saul-Mirone/vite-plugin-book&quot;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;img class=&quot;emoji&quot; draggable=&quot;false&quot; alt=&quot;❤️&quot; src=&quot;https://twemoji.maxcdn.com/2/72x72/2764.png&quot; style=&quot;height: 1em; width: 1em; margin: 0 .05em 0 .1em; vertical-align: -0.1em;&quot;&gt;You can fund me to help the maintenance and development:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/sponsors/Saul-Mirone&quot;&gt;Github Sponsor&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://afdian.net/@mirone&quot;&gt;Afdian&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://opencollective.com/milkdown&quot;&gt;Open Collective&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+                &lt;div style=&quot;margin-top=55px; font-style: italic;&quot;&gt;(This is an article posted to my blog at saul-mirone.github.io. You can read it online by &lt;a href=&quot;https://saul-mirone.github.io/introducing-vite-book/&quot;&gt;clicking here&lt;/a&gt;.)&lt;/div&gt;
+              </content:encoded></item><item><title><![CDATA[How to Design a Type Friendly Context]]></title><description><![CDATA[IoC is the key.]]></description><link>https://saul-mirone.github.io/how-to-design-a-type-friendly-context/</link><guid isPermaLink="false">https://saul-mirone.github.io/how-to-design-a-type-friendly-context/</guid><pubDate>Tue, 03 Aug 2021 12:29:40 GMT</pubDate><content:encoded>&lt;p&gt;In the world of JavaScript, &lt;a href=&quot;https://koajs.com/&quot;&gt;Koa&lt;/a&gt; is a milestone.
 Although &lt;a href=&quot;http://sinatrarb.com/&quot;&gt;sinatra&lt;/a&gt; is born before it,
 Koa makes it really popular that apps should built by a simple core to load plugins,
 and bundles of plugins to implement unique features.
