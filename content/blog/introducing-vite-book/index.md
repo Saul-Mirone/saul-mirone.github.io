@@ -108,7 +108,7 @@ npm run preview
 
 ## Online playground
 
-You can play with it on [stackblitz](https://stackblitz.com/edit/vitejs-vite-7u4cxt?file=package.json)
+You can play with it on [stackblitz](https://stackblitz.com/edit/vitejs-vite-7u4cxt?file=package.json).
 
 ## Summary
 
