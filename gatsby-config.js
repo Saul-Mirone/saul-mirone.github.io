@@ -1,7 +1,7 @@
 module.exports = {
   siteMetadata: {
     title: `Disenchanted`,
-    author: `Saul Mirone`,
+    author: `Mirone`,
     description: `Personal blog by Saul Mirone`,
     siteUrl: `https://saul-mirone.github.io`,
     social: {
