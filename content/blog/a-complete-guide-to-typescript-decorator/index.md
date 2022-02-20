@@ -601,7 +601,7 @@ c.sayRepeat('', 'lol' as any); // throw an error
 For now, there are three types of design-time annotations we can get:
 
 * `design:type`: type of property.
-* `desin:paramtypes`: type of parameters of method.
+* `design:paramtypes`: type of parameters of method.
 * `design:returntype`: type of return type of method.
 
 Results of this three types are constructor functions (such as `String` and `Number`).
