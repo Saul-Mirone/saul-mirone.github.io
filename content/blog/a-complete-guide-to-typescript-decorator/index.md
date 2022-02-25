@@ -12,7 +12,7 @@ I hope you can figure out when and how to use this powerful feature after read t
 
 # Overview
 
-Decorators are just functions in a particular form which can apply to a:
+Decorators are just functions in a particular form which can apply to:
 1. Class
 2. Class Property
 3. Class Method
