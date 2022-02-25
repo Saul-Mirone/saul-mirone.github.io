@@ -7,23 +7,23 @@ description: Decorators make your code leaner.
 Decorators make the world of TypeScript better.
 People use lots of libraries built based on this awesome feature,
 for example: [Angular](https://angular.io/) and [Nestjs](https://nestjs.com/).
-In this blog I would explore decorators with many details.
+In this blog I will explore decorators with many details.
 I hope you can figure out when and how to use this powerful feature after read this blog.
 
 # Overview
 
-Decorators are just functions in a particular form which can apply to:
+Decorators are just functions in a particular form which can apply to a:
 1. Class
 2. Class Property
 3. Class Method
 4. Class Accessor
 5. Class Method Parameter
 
-So, applying decorators is pretty like composing a chain of functions,
+So, applying decorators is a lot like composing a chain of functions,
 pretty much like higher-order function or class.
 With decorators, we can easily implement [proxy pattern](https://en.wikipedia.org/wiki/Proxy_pattern) to reduce our code and do some cool things.
 
-The syntax of decorator is pretty simple, just add the `@` operator before the decorator you want to use, then the decorator will be applied to the target:
+The syntax of a decorator is pretty simple, just add the `@` operator before the decorator you want to use, then the decorator will be applied to the target:
 
 ```typescript
 function simpleDecorator() {
@@ -42,7 +42,7 @@ There are 5 types of decorators we can use:
 4. Accessor Decorators
 5. Parameter Decorators
 
-We can take a quick overview for all the 5 decorators:
+Here's a quick example class that includes all 5 decorators:
 
 ```typescript
 @classDecorator
@@ -64,7 +64,7 @@ class Bird {
 # Evaluation
 
 ## Timing
-Decorators evaluate only one time when apply. For example:
+Decorators evaluate only one once when a class definition is . For example:
 
 ```typescript
 function f(C) {
@@ -78,17 +78,15 @@ class A {}
 // output: apply decorator
 ```
 
-This code will log `apply decorator` in terminal, even though we didn't use the class A.
+This code will log `'apply decorator'` in terminal, even though we never initialized an instance of class `A`.
 
 ## Order of Evaluation
-The composition order of different types of decorators is well-defined:
+The evaluation order of different types of decorators is well-defined:
 
-1. Instance Member:  
-Parameter Decorators -> Method / Accessor / Property Decorators
-2. Static Member:  
-Parameter Decorators -> Method / Accessor / Property Decorators
-3. Constructor: Parameter Decorators
-4. Class Decorators
+1. Parameter Decorators, followed by Method, Accessor, or Property Decorators are applied for each instance member.
+2. Parameter Decorators, followed by Method, Accessor, or Property Decorators are applied for each static member.
+3. Parameter Decorators are applied for the constructor.
+4. Class Decorators are applied for the class.
 
 For example, consider the following code:
 
@@ -139,14 +137,14 @@ call:  Constructor Parameter
 call:  Class Decorator
 ```
 
-You may notice that the evaluation of instance property is later than the instance method,
-however the evaluation of static property is earlier than the static method.
+You may notice that the evaluation of the instance property is later than the instance method,
+however the evaluation of the static property is earlier than the static method.
 This is because the evaluation order of property/accessor/method decorators
-is depends on their order of appearance in code.
+is dependant on their order of appearance in code.
 
 However,
-the order of evaluation for different parameters within the same method or constructor is opposite,
-the last parameter decorator will be called first:
+the order of evaluation for different parameters within the same method or constructor is the opposite.
+Here, the last parameter decorator will be called first:
 
 ```typescript
 function f(key: string): any {
@@ -175,7 +173,7 @@ call:  Parameter Foo
 
 ## Composition of Multiple Decorators
 
-You can apply multiple decorators to a single target. The order of the decorators composed is:
+You can apply multiple decorators to a single target. The evaluation order of the decorators composed is:
 
 1. Outer Decorator Evaluate
 2. Inner Decorator Evaluate
@@ -264,7 +262,7 @@ class Foo {
 new Foo().foo; // Property 'foo' does not exist on type 'Foo'
 ```
 
-This is [a well-known issue](https://github.com/microsoft/TypeScript/issues/4881) in typescript.
+This is [a well-known issue](https://github.com/microsoft/TypeScript/issues/4881) in Typescript.
 What we can do for now is to provide a class with type information to be extended by the target class:
 
 ```typescript
@@ -300,7 +298,7 @@ type PropertyDecorator =
   The return value will be ignored.
 
 Except being used to collect information,
-property decorators can also be used to add some methods or property to the class.
+property decorators can also be used to add some methods or properties to the class.
 For example, we can write a decorator to add the ability to listen changes on some properties.
 
 ```typescript
@@ -361,8 +359,8 @@ type MethodDecorator = <T>(
 * @Returns:  
   If returns a value, it will be used as the descriptor of the member.
 
-What makes method decorators different from property decorators is the `descriptor` parameter.
-By which can `hack` the original implementation and inject some common logic.
+What makes method decorators different from property decorators is the `descriptor` parameter,
+which lets us override the original implementation and inject some common logic.
 For example, we can add logger for some method to log out the input and output:
 
 ```typescript
@@ -392,16 +390,16 @@ c.add(1, 2);
 
 ## Accessor Decorators
 
-Accessor decorators are generally the same as method decorators, the only difference are the keys in the descriptor:
+Accessor decorators are generally the same as method decorators. The only differences are the keys in the descriptor:
 
-Descriptor in a method decorator has keys:
+The `descriptor` in a **method** decorator has keys:
 
 * `value`
 * `writable`
 * `enumerable`
 * `configurable`
 
-Descriptor in an accessor decorator has keys:
+The `descriptor` in an **accessor** decorator has keys:
 
 * `get`
 * `set`
@@ -459,20 +457,20 @@ type ParameterDecorator = (
 * @Returns:  
   The return value will be ignored.
 
-A standalone parameter decorator can do few things,
-it's always be used to record information which can be used by other decorators.
+A standalone parameter decorator can't do much.
+It's typically used to record information which can be used by other decorators.
   
 # Combination
 
 For some complex cases,
 we may need to use different types of decorators together.
 For instance,
-if we want to add not only static type checker,
-but also run-time type checker for our api.
+if we wanted to add both a static type checker
+and a run-time type checker for our api.
 
 There are 3 steps to implement the feature:
 
-1. Mark the parameters needed to be validated
+1. Mark the parameters that need to be validated
 (since the parameter decorators evaluate before the method decorators).
 2. Change the value of descriptor of the method,
 run the parameter validators before the method, throw error if failed.
@@ -543,11 +541,11 @@ but also the duty of different types of decorators.
 
 # Metadata
 
-Strictly speaking, metadata and decorator are two separate parts of EcmaScript.
+Strictly speaking, metadata and decorators are two separate parts of ECMAScript.
 However, if you want to play with something like [reflection](https://en.wikipedia.org/wiki/Reflection_(computer_programming)),
 you always need both of them.
 
-Just look at our previous example, what if we don't want to write different types of validators?
+Just look at our previous example. what if we don't want to write different types of validators?
 Is it possible to just write one validator which can **infer** the validators from the type annotation of the method?
 
 With the help of [reflect-metadata](https://github.com/rbuckton/reflect-metadata), 
