@@ -34,7 +34,7 @@ function simpleDecorator() {
 class A {}
 ```
 
-There are 5 types of decorators we can use:
+There are five types of decorators we can use:
 
 1. Class Decorators
 2. Property Decorators
@@ -42,7 +42,7 @@ There are 5 types of decorators we can use:
 4. Accessor Decorators
 5. Parameter Decorators
 
-Here's a quick example class that includes all 5 decorators:
+Here's a quick example class that includes all five decorator types:
 
 ```typescript
 @classDecorator
@@ -64,7 +64,7 @@ class Bird {
 # Evaluation
 
 ## Timing
-Decorators evaluate only one once when a class definition is . For example:
+Decorators execute only once, when a class definition is first evaluated at runtime. For example:
 
 ```typescript
 function f(C) {
@@ -78,7 +78,7 @@ class A {}
 // output: apply decorator
 ```
 
-This code will log `'apply decorator'` in terminal, even though we never initialized an instance of class `A`.
+This code will log `'apply decorator'`, even though we never initialized a `new` instance of the class `A`.
 
 ## Order of Evaluation
 The evaluation order of different types of decorators is well-defined:
