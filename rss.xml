@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Saul Mirone's Disenchanted Blog RSS Feed]]></title><description><![CDATA[Personal blog by Saul Mirone]]></description><link>https://saul-mirone.github.io</link><generator>GatsbyJS</generator><lastBuildDate>Sun, 20 Feb 2022 13:52:08 GMT</lastBuildDate><item><title><![CDATA[Introducing Vite Book]]></title><description><![CDATA[A new way to write and manage your documentation.]]></description><link>https://saul-mirone.github.io/introducing-vite-book/</link><guid isPermaLink="false">https://saul-mirone.github.io/introducing-vite-book/</guid><pubDate>Fri, 04 Feb 2022 12:14:55 GMT</pubDate><content:encoded>&lt;h2&gt;Motivation&lt;/h2&gt;
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Saul Mirone's Disenchanted Blog RSS Feed]]></title><description><![CDATA[Personal blog by Saul Mirone]]></description><link>https://saul-mirone.github.io</link><generator>GatsbyJS</generator><lastBuildDate>Sat, 26 Feb 2022 07:36:21 GMT</lastBuildDate><item><title><![CDATA[Introducing Vite Book]]></title><description><![CDATA[A new way to write and manage your documentation.]]></description><link>https://saul-mirone.github.io/introducing-vite-book/</link><guid isPermaLink="false">https://saul-mirone.github.io/introducing-vite-book/</guid><pubDate>Fri, 04 Feb 2022 12:14:55 GMT</pubDate><content:encoded>&lt;h2&gt;Motivation&lt;/h2&gt;
 &lt;p&gt;In the past few years, I tried lots of documentation generators, such as &lt;a href=&quot;https://docsify.js.org/&quot;&gt;docsify&lt;/a&gt;, &lt;a href=&quot;https://docusaurus.io/&quot;&gt;docusaurus&lt;/a&gt;, &lt;a href=&quot;https://github.com/doczjs/docz&quot;&gt;docz&lt;/a&gt;, etc… But I couldn’t find a good one that I liked for following reasons:&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;I have to switch between my markdown editor and the browser many times during writing docs to make sure they looks good. Which is really annoying when I only have one screen with me.&lt;/li&gt;
@@ -303,7 +303,7 @@ values&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span cla
               </content:encoded></item><item><title><![CDATA[A Complete Guide to TypeScript Decorators]]></title><description><![CDATA[Decorators make your code leaner.]]></description><link>https://saul-mirone.github.io/a-complete-guide-to-typescript-decorator/</link><guid isPermaLink="false">https://saul-mirone.github.io/a-complete-guide-to-typescript-decorator/</guid><pubDate>Mon, 07 Sep 2020 17:44:55 GMT</pubDate><content:encoded>&lt;p&gt;Decorators make the world of TypeScript better.
 People use lots of libraries built based on this awesome feature,
 for example: &lt;a href=&quot;https://angular.io/&quot;&gt;Angular&lt;/a&gt; and &lt;a href=&quot;https://nestjs.com/&quot;&gt;Nestjs&lt;/a&gt;.
-In this blog I would explore decorators with many details.
+In this blog I will explore decorators with many details.
 I hope you can figure out when and how to use this powerful feature after read this blog.&lt;/p&gt;
 &lt;h1&gt;Overview&lt;/h1&gt;
 &lt;p&gt;Decorators are just functions in a particular form which can apply to:&lt;/p&gt;
@@ -314,17 +314,17 @@ I hope you can figure out when and how to use this powerful feature after read t
 &lt;li&gt;Class Accessor&lt;/li&gt;
 &lt;li&gt;Class Method Parameter&lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;So, applying decorators is pretty like composing a chain of functions,
+&lt;p&gt;So, applying decorators is a lot like composing a chain of functions,
 pretty much like higher-order function or class.
 With decorators, we can easily implement &lt;a href=&quot;https://en.wikipedia.org/wiki/Proxy_pattern&quot;&gt;proxy pattern&lt;/a&gt; to reduce our code and do some cool things.&lt;/p&gt;
-&lt;p&gt;The syntax of decorator is pretty simple, just add the &lt;code class=&quot;language-text&quot;&gt;@&lt;/code&gt; operator before the decorator you want to use, then the decorator will be applied to the target:&lt;/p&gt;
+&lt;p&gt;The syntax of a decorator is pretty simple, just add the &lt;code class=&quot;language-text&quot;&gt;@&lt;/code&gt; operator before the decorator you want to use, then the decorator will be applied to the target:&lt;/p&gt;
 &lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;typescript&quot;&gt;&lt;pre class=&quot;language-typescript&quot;&gt;&lt;code class=&quot;language-typescript&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;simpleDecorator&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
   &lt;span class=&quot;token builtin&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&apos;---hi I am a decorator---&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
 &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
 
 &lt;span class=&quot;token decorator&quot;&gt;&lt;span class=&quot;token at operator&quot;&gt;@&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;simpleDecorator&lt;/span&gt;&lt;/span&gt;
 &lt;span class=&quot;token keyword&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;token class-name&quot;&gt;&lt;span class=&quot;token constant&quot;&gt;A&lt;/span&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;There are 5 types of decorators we can use:&lt;/p&gt;
+&lt;p&gt;There are five types of decorators we can use:&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;Class Decorators&lt;/li&gt;
 &lt;li&gt;Property Decorators&lt;/li&gt;
@@ -332,7 +332,7 @@ With decorators, we can easily implement &lt;a href=&quot;https://en.wikipedia.o
 &lt;li&gt;Accessor Decorators&lt;/li&gt;
 &lt;li&gt;Parameter Decorators&lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;We can take a quick overview for all the 5 decorators:&lt;/p&gt;
+&lt;p&gt;Here’s a quick example class that includes all five decorator types:&lt;/p&gt;
 &lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;typescript&quot;&gt;&lt;pre class=&quot;language-typescript&quot;&gt;&lt;code class=&quot;language-typescript&quot;&gt;&lt;span class=&quot;token decorator&quot;&gt;&lt;span class=&quot;token at operator&quot;&gt;@&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;classDecorator&lt;/span&gt;&lt;/span&gt;
 &lt;span class=&quot;token keyword&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;token class-name&quot;&gt;Bird&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
   &lt;span class=&quot;token decorator&quot;&gt;&lt;span class=&quot;token at operator&quot;&gt;@&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;propertyDecorator&lt;/span&gt;&lt;/span&gt;
@@ -349,7 +349,7 @@ With decorators, we can easily implement &lt;a href=&quot;https://en.wikipedia.o
 &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;h1&gt;Evaluation&lt;/h1&gt;
 &lt;h2&gt;Timing&lt;/h2&gt;
-&lt;p&gt;Decorators evaluate only one time when apply. For example:&lt;/p&gt;
+&lt;p&gt;Decorators execute only once, when a class definition is first evaluated at runtime. For example:&lt;/p&gt;
 &lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;typescript&quot;&gt;&lt;pre class=&quot;language-typescript&quot;&gt;&lt;code class=&quot;language-typescript&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;f&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token constant&quot;&gt;C&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
   &lt;span class=&quot;token builtin&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&apos;apply decorator&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
   &lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;token constant&quot;&gt;C&lt;/span&gt;
@@ -359,17 +359,15 @@ With decorators, we can easily implement &lt;a href=&quot;https://en.wikipedia.o
 &lt;span class=&quot;token keyword&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;token class-name&quot;&gt;&lt;span class=&quot;token constant&quot;&gt;A&lt;/span&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
 
 &lt;span class=&quot;token comment&quot;&gt;// output: apply decorator&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;This code will log &lt;code class=&quot;language-text&quot;&gt;apply decorator&lt;/code&gt; in terminal, even though we didn’t use the class A.&lt;/p&gt;
+&lt;p&gt;This code will log &lt;code class=&quot;language-text&quot;&gt;&apos;apply decorator&apos;&lt;/code&gt;, even though we never initialized a &lt;code class=&quot;language-text&quot;&gt;new&lt;/code&gt; instance of the class &lt;code class=&quot;language-text&quot;&gt;A&lt;/code&gt;.&lt;/p&gt;
 &lt;h2&gt;Order of Evaluation&lt;/h2&gt;
-&lt;p&gt;The composition order of different types of decorators is well-defined:&lt;/p&gt;
+&lt;p&gt;The evaluation order of different types of decorators is well-defined:&lt;/p&gt;
 &lt;ol&gt;
-&lt;li&gt;Instance Member:&lt;/li&gt;
+&lt;li&gt;Parameter Decorators, followed by Method, Accessor, or Property Decorators are applied for each instance member.&lt;/li&gt;
+&lt;li&gt;Parameter Decorators, followed by Method, Accessor, or Property Decorators are applied for each static member.&lt;/li&gt;
+&lt;li&gt;Parameter Decorators are applied for the constructor.&lt;/li&gt;
+&lt;li&gt;Class Decorators are applied for the class.&lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;Parameter Decorators -&gt; Method / Accessor / Property Decorators
-2. Static Member:&lt;br&gt;
-Parameter Decorators -&gt; Method / Accessor / Property Decorators
-3. Constructor: Parameter Decorators
-4. Class Decorators&lt;/p&gt;
 &lt;p&gt;For example, consider the following code:&lt;/p&gt;
 &lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;typescript&quot;&gt;&lt;pre class=&quot;language-typescript&quot;&gt;&lt;code class=&quot;language-typescript&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;f&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;key&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token builtin&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token builtin&quot;&gt;any&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
   &lt;span class=&quot;token builtin&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&quot;evaluate: &quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; key&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
@@ -411,13 +409,13 @@ evaluate:  Class Decorator
 evaluate:  Constructor Parameter
 call:  Constructor Parameter
 call:  Class Decorator&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;You may notice that the evaluation of instance property is later than the instance method,
-however the evaluation of static property is earlier than the static method.
+&lt;p&gt;You may notice that the evaluation of the instance property is later than the instance method,
+however the evaluation of the static property is earlier than the static method.
 This is because the evaluation order of property/accessor/method decorators
-is depends on their order of appearance in code.&lt;/p&gt;
+is dependant on their order of appearance in code.&lt;/p&gt;
 &lt;p&gt;However,
-the order of evaluation for different parameters within the same method or constructor is opposite,
-the last parameter decorator will be called first:&lt;/p&gt;
+the order of evaluation for different parameters within the same method or constructor is the opposite.
+Here, the last parameter decorator will be called first:&lt;/p&gt;
 &lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;typescript&quot;&gt;&lt;pre class=&quot;language-typescript&quot;&gt;&lt;code class=&quot;language-typescript&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;f&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;key&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token builtin&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token builtin&quot;&gt;any&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
   &lt;span class=&quot;token builtin&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&quot;evaluate: &quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; key&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
   &lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
@@ -437,7 +435,7 @@ evaluate:  Parameter Bar
 call:  Parameter Bar
 call:  Parameter Foo&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;h2&gt;Composition of Multiple Decorators&lt;/h2&gt;
-&lt;p&gt;You can apply multiple decorators to a single target. The order of the decorators composed is:&lt;/p&gt;
+&lt;p&gt;You can apply multiple decorators to a single target. The evaluation order of the decorators composed is:&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;Outer Decorator Evaluate&lt;/li&gt;
 &lt;li&gt;Inner Decorator Evaluate&lt;/li&gt;
@@ -508,7 +506,7 @@ the classes to overwrite the original &lt;code class=&quot;language-text&quot;&g
 &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
 
 &lt;span class=&quot;token keyword&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;token class-name&quot;&gt;Foo&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;foo&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;token comment&quot;&gt;// Property &apos;foo&apos; does not exist on type &apos;Foo&apos;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;This is &lt;a href=&quot;https://github.com/microsoft/TypeScript/issues/4881&quot;&gt;a well-known issue&lt;/a&gt; in typescript.
+&lt;p&gt;This is &lt;a href=&quot;https://github.com/microsoft/TypeScript/issues/4881&quot;&gt;a well-known issue&lt;/a&gt; in Typescript.
 What we can do for now is to provide a class with type information to be extended by the target class:&lt;/p&gt;
 &lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;typescript&quot;&gt;&lt;pre class=&quot;language-typescript&quot;&gt;&lt;code class=&quot;language-typescript&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;declare&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;token generic-function&quot;&gt;&lt;span class=&quot;token function&quot;&gt;Blah&lt;/span&gt;&lt;span class=&quot;token generic class-name&quot;&gt;&lt;span class=&quot;token operator&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;token constant&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;target&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token constant&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token constant&quot;&gt;T&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;&amp;amp;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;foo&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token builtin&quot;&gt;number&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
 
@@ -539,7 +537,7 @@ or the prototype of the class for an instance member.
 The return value will be ignored.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;Except being used to collect information,
-property decorators can also be used to add some methods or property to the class.
+property decorators can also be used to add some methods or properties to the class.
 For example, we can write a decorator to add the ability to listen changes on some properties.&lt;/p&gt;
 &lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;typescript&quot;&gt;&lt;pre class=&quot;language-typescript&quot;&gt;&lt;code class=&quot;language-typescript&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;capitalizeFirstLetter&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;str&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token builtin&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
   &lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; str&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;charAt&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;toUpperCase&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;+&lt;/span&gt; str&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;slice&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
@@ -596,8 +594,8 @@ or the prototype of the class for an instance member.
 &lt;li&gt;@Returns:&lt;br&gt;
 If returns a value, it will be used as the descriptor of the member.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;What makes method decorators different from property decorators is the &lt;code class=&quot;language-text&quot;&gt;descriptor&lt;/code&gt; parameter.
-By which can &lt;code class=&quot;language-text&quot;&gt;hack&lt;/code&gt; the original implementation and inject some common logic.
+&lt;p&gt;What makes method decorators different from property decorators is the &lt;code class=&quot;language-text&quot;&gt;descriptor&lt;/code&gt; parameter,
+which lets us override the original implementation and inject some common logic.
 For example, we can add logger for some method to log out the input and output:&lt;/p&gt;
 &lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;typescript&quot;&gt;&lt;pre class=&quot;language-typescript&quot;&gt;&lt;code class=&quot;language-typescript&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;logger&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;target&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token builtin&quot;&gt;any&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; propertyKey&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token builtin&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; descriptor&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; PropertyDescriptor&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
   &lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; original &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; descriptor&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;value&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
@@ -622,15 +620,15 @@ c&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&q
 &lt;span class=&quot;token comment&quot;&gt;// -&gt; params: 1, 2&lt;/span&gt;
 &lt;span class=&quot;token comment&quot;&gt;// -&gt; result: 3&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;h2&gt;Accessor Decorators&lt;/h2&gt;
-&lt;p&gt;Accessor decorators are generally the same as method decorators, the only difference are the keys in the descriptor:&lt;/p&gt;
-&lt;p&gt;Descriptor in a method decorator has keys:&lt;/p&gt;
+&lt;p&gt;Accessor decorators are generally the same as method decorators. The only differences are the keys in the descriptor:&lt;/p&gt;
+&lt;p&gt;The &lt;code class=&quot;language-text&quot;&gt;descriptor&lt;/code&gt; in a &lt;strong&gt;method&lt;/strong&gt; decorator has keys:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;value&lt;/code&gt;&lt;/li&gt;
 &lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;writable&lt;/code&gt;&lt;/li&gt;
 &lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;enumerable&lt;/code&gt;&lt;/li&gt;
 &lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;configurable&lt;/code&gt;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;Descriptor in an accessor decorator has keys:&lt;/p&gt;
+&lt;p&gt;The &lt;code class=&quot;language-text&quot;&gt;descriptor&lt;/code&gt; in an &lt;strong&gt;accessor&lt;/strong&gt; decorator has keys:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;get&lt;/code&gt;&lt;/li&gt;
 &lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;set&lt;/code&gt;&lt;/li&gt;
@@ -683,17 +681,17 @@ or the prototype of the class for an instance member.
 &lt;li&gt;@Returns:&lt;br&gt;
 The return value will be ignored.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;A standalone parameter decorator can do few things,
-it’s always be used to record information which can be used by other decorators.&lt;/p&gt;
+&lt;p&gt;A standalone parameter decorator can’t do much.
+It’s typically used to record information which can be used by other decorators.&lt;/p&gt;
 &lt;h1&gt;Combination&lt;/h1&gt;
 &lt;p&gt;For some complex cases,
 we may need to use different types of decorators together.
 For instance,
-if we want to add not only static type checker,
-but also run-time type checker for our api.&lt;/p&gt;
+if we wanted to add both a static type checker
+and a run-time type checker for our api.&lt;/p&gt;
 &lt;p&gt;There are 3 steps to implement the feature:&lt;/p&gt;
 &lt;ol&gt;
-&lt;li&gt;Mark the parameters needed to be validated&lt;/li&gt;
+&lt;li&gt;Mark the parameters that need to be validated&lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;(since the parameter decorators evaluate before the method decorators).
 2. Change the value of descriptor of the method,
@@ -758,10 +756,10 @@ c&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&q
 it is important for us to understand not only the evaluation order,
 but also the duty of different types of decorators.&lt;/p&gt;
 &lt;h1&gt;Metadata&lt;/h1&gt;
-&lt;p&gt;Strictly speaking, metadata and decorator are two separate parts of EcmaScript.
+&lt;p&gt;Strictly speaking, metadata and decorators are two separate parts of ECMAScript.
 However, if you want to play with something like &lt;a href=&quot;https://en.wikipedia.org/wiki/Reflection_(computer_programming)&quot;&gt;reflection&lt;/a&gt;,
 you always need both of them.&lt;/p&gt;
-&lt;p&gt;Just look at our previous example, what if we don’t want to write different types of validators?
+&lt;p&gt;Just look at our previous example. what if we don’t want to write different types of validators?
 Is it possible to just write one validator which can &lt;strong&gt;infer&lt;/strong&gt; the validators from the type annotation of the method?&lt;/p&gt;
 &lt;p&gt;With the help of &lt;a href=&quot;https://github.com/rbuckton/reflect-metadata&quot;&gt;reflect-metadata&lt;/a&gt;,
 we can get the design-time types.&lt;/p&gt;
