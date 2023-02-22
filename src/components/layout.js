@@ -123,7 +123,7 @@ const Layout = ({ location, title, children }) => {
         />
       </header>
       <main>{children}</main>
-      <footer>
+      <footer style={{marginTop: '4.375rem', paddingTop: '1.75rem'}}>
         <div style={{ float: "right" }}>
           <a href="/rss.xml" target="_blank" rel="noopener noreferrer">
             rss
