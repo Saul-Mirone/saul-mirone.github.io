@@ -54,8 +54,20 @@ const Header = ({ title, location }) => {
 
 const themeKey = "theme"
 
+const defaultTheme = window && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? "night" : "light"
 const Layout = ({ location, title, social, children }) => {
-  const [theme, setTheme] = React.useState("light");
+  const [theme, setTheme] = React.useState(defaultTheme);
+
+  React.useEffect(() => {
+    const onChange = event => {
+      setTheme(event.matches ? "night" : "light")
+    }
+    const media = window.matchMedia('(prefers-color-scheme: dark)');
+    media.addEventListener('change', onChange);
+    return () => {
+      media.removeEventListener('change', onChange);
+    }
+  }, [])
 
   React.useEffect(() => {
     if (typeof window === 'undefined') return;
