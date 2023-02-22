@@ -2,10 +2,11 @@ module.exports = {
   siteMetadata: {
     title: `Disenchanted`,
     author: `Mirone`,
-    description: `Personal blog by Saul Mirone`,
+    description: `Personal blog by Mirone`,
     siteUrl: `https://saul-mirone.github.io`,
     social: {
       twitter: `@SaulMirone`,
+      github: `Saul-Mirone`
     },
   },
   plugins: [

@@ -9,11 +9,12 @@ import { rhythm, scale } from "../utils/typography"
 
 const BlogPostTemplate = ({ data, pageContext, location }) => {
   const post = data.markdownRemark
-  const siteTitle = data.site.siteMetadata.title
+  const title = data.site.siteMetadata.title
+  const social = data.site.siteMetadata.social
   const { previous, next, translations, langKey } = pageContext
 
   return (
-    <Layout location={location} title={siteTitle}>
+    <Layout location={location} title={title} social={social}>
       <Seo
         lang={langKey}
         title={post.frontmatter.title}
@@ -89,6 +90,10 @@ export const pageQuery = graphql`
     site {
       siteMetadata {
         title
+        social {
+          twitter
+          github
+        }
       }
     }
     markdownRemark(fields: { slug: { eq: $slug } }) {

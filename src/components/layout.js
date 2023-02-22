@@ -54,7 +54,7 @@ const Header = ({ title, location }) => {
 
 const themeKey = "theme"
 
-const Layout = ({ location, title, children }) => {
+const Layout = ({ location, title, social, children }) => {
   const [theme, setTheme] = React.useState("light");
 
   React.useEffect(() => {
@@ -130,7 +130,7 @@ const Layout = ({ location, title, children }) => {
           </a>
         </div>
         <a
-          href="https://mobile.twitter.com/SaulMirone"
+          href={`https://twitter.com/${social.twitter}`}
           target="_blank"
           rel="noopener noreferrer"
         >
@@ -138,7 +138,7 @@ const Layout = ({ location, title, children }) => {
         </a>{" "}
         &bull;{" "}
         <a
-          href="https://github.com/Saul-Mirone"
+          href={`https://github.com/${social.github}`}
           target="_blank"
           rel="noopener noreferrer"
         >

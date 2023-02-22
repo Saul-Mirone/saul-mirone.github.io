@@ -7,11 +7,12 @@ import Seo from "../components/seo"
 import { rhythm } from "../utils/typography"
 
 const BlogIndex = ({ data, location, pageContext }) => {
-  const siteTitle = data.site.siteMetadata.title
+  const title = data.site.siteMetadata.title
+  const social = data.site.siteMetadata.social
   const posts = data.allMarkdownRemark.edges
 
   return (
-    <Layout location={location} title={siteTitle}>
+    <Layout location={location} title={title} social={social}>
       <Seo title="" lang={pageContext.langKey} />
       <Bio />
       {posts.map(({ node }) => {
@@ -51,6 +52,10 @@ export const pageQuery = graphql`
     site {
       siteMetadata {
         title
+        social {
+          twitter
+          github
+        }
       }
     }
     allMarkdownRemark(
