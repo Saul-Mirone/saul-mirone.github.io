@@ -25,7 +25,7 @@ const Bio = () => {
     }
   `)
 
-  const { author, social } = data.site.siteMetadata
+  const { author } = data.site.siteMetadata
   return (
     <div
       style={{
@@ -47,7 +47,7 @@ const Bio = () => {
       />
       <p style={{ whiteSpace: "pre-wrap" }}>
         Personal blog by{" "}
-        <a href={`https://twitter.com/${social.twitter}`}>{author}</a>.{"\n"}
+        <a href="https://github.com/Saul-Mirone">{author}</a>.{"\n"}
         Kiss the demons out of my dreams.
       </p>
     </div>
