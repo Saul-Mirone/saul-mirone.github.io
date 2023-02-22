@@ -54,11 +54,14 @@ const Header = ({ title, location }) => {
 
 const themeKey = "theme"
 
-const defaultTheme = window && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? "night" : "light"
+const defaultTheme = typeof window !== 'undefined' && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? "night" : "light"
 const Layout = ({ location, title, social, children }) => {
   const [theme, setTheme] = React.useState(defaultTheme);
 
   React.useEffect(() => {
+    if (typeof window === undefined) {
+      return;
+    }
     const onChange = event => {
       setTheme(event.matches ? "night" : "light")
     }
