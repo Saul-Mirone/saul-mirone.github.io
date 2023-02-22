@@ -1,4 +1,124 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Saul Mirone's Disenchanted Blog RSS Feed]]></title><description><![CDATA[Personal blog by Saul Mirone]]></description><link>https://saul-mirone.github.io</link><generator>GatsbyJS</generator><lastBuildDate>Wed, 22 Feb 2023 12:30:07 GMT</lastBuildDate><item><title><![CDATA[Introducing Vite Book]]></title><description><![CDATA[A new way to write and manage your documentation.]]></description><link>https://saul-mirone.github.io/introducing-vite-book/</link><guid isPermaLink="false">https://saul-mirone.github.io/introducing-vite-book/</guid><pubDate>Fri, 04 Feb 2022 12:14:55 GMT</pubDate><content:encoded>&lt;h2&gt;Motivation&lt;/h2&gt;
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Saul Mirone's Disenchanted Blog RSS Feed]]></title><description><![CDATA[Personal blog by Mirone]]></description><link>https://saul-mirone.github.io</link><generator>GatsbyJS</generator><lastBuildDate>Wed, 22 Feb 2023 19:31:45 GMT</lastBuildDate><item><title><![CDATA[A Brief Introduction to Milkdown v7]]></title><description><![CDATA[A brand new version of [Milkdown](https://milkdown.dev) is coming. Let's take a look at what's new.]]></description><link>https://saul-mirone.github.io/a-brief-introduction-to-milkdown-v7/</link><guid isPermaLink="false">https://saul-mirone.github.io/a-brief-introduction-to-milkdown-v7/</guid><pubDate>Wed, 22 Feb 2023 17:56:19 GMT</pubDate><content:encoded>&lt;p&gt;It’s been almost one year since the release of milkdown V6.
+It helped a lot of users to build their own markdown based applications.
+It has 13k downloads per month and I feel so grateful that users like that.&lt;/p&gt;
+&lt;p&gt;However, we noticed that there’re some problems cannot be resolved if we don’t make a new major version.
+What big changes did we made?  I’ll introduce them to you in this blog.&lt;/p&gt;
+&lt;h1&gt;TL;DR&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;The editor becomes a first-class headless component.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Factory plugins are fully replaced by &lt;strong&gt;composable plugins&lt;/strong&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Runtime plugin toggling is supported.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Universal widget plugins.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Better Vue and React support.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;API documentation is provided.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1&gt;Why Headless?&lt;/h1&gt;
+&lt;p&gt;In the past, milkdown had a lot of internal styles to make sure the editor can work out of box and the themes are easy to create.
+However, I found it limits the users to design their own editor.
+Even worse, if you have an well designed application,
+it is really hard to keep the style of the milkdown editor same with the rest of the application.
+You’ll need to override lots of styles everywhere.
+It stops a log of users from using milkdown.&lt;/p&gt;
+&lt;p&gt;If we think about why users need an editor,
+the most important thing is always the functionality of the editor.
+Users just want a component that can provide smooth editing experience.
+Style will always be the second thing.&lt;/p&gt;
+&lt;p&gt;So, why not remove all the internal styles and make the editor a headless component?
+The users can easily integrate the editor into their own application.
+They can use their own styles and even use their own components to render the editor.
+We just care about the functionality of the editor. Make sure it works well.&lt;/p&gt;
+&lt;h1&gt;Composable Plugins&lt;/h1&gt;
+&lt;p&gt;Although the composable plugins have been existed in milkdown for a long time,
+we use factory plugins to create most of the official plugins in V6.&lt;/p&gt;
+&lt;p&gt;But, the problem is that factory plugins limit the possibility of the plugins.
+The factory plugins handle a bunch of complex logic and it is hard to extend.
+So for users who want to create a plugin in a easy way, they must follow the factory plugin’s way.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;ts&quot;&gt;&lt;pre class=&quot;language-ts&quot;&gt;&lt;code class=&quot;language-ts&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; nodePlugin &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;createPlugin&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    id&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;node&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+    schema&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; someSchema&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+    inputRules&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; someInputRules
+    commands&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; someCommands
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;See? You can define a lot of things inside the factory plugin.
+But if you want to use some part of them in another plugin, it’s really hard to do that.&lt;/p&gt;
+&lt;p&gt;However, the milkdown’s plugin system is designed to be flexible and composable.
+We want to let users to control the data flow entirely.&lt;/p&gt;
+&lt;p&gt;So, we decided to remove all the factory plugins and use composable plugins to replace them.
+The composable plugins can keep the atomicity of the plugins and make the plugin system more flexible.
+They also make the plugin system easier to maintain.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;ts&quot;&gt;&lt;pre class=&quot;language-ts&quot;&gt;&lt;code class=&quot;language-ts&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; nodeSchema &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;$node&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&apos;node&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; someSchema&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; nodeInputRules &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;$inputRules&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;someInputRules&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; nodeCommands &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;$commands&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;someCommands&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;If you want to reuse them, it also will be very easy.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight has-highlighted-lines&quot; data-language=&quot;ts&quot;&gt;&lt;pre class=&quot;language-ts&quot;&gt;&lt;code class=&quot;language-ts&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; anotherCommand &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;$commands&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+&lt;span class=&quot;gatsby-highlight-code-line&quot;&gt;    &lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;setBlockType&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;nodeSchema&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;type&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h1&gt;Runtime Plugin Toggling&lt;/h1&gt;
+&lt;p&gt;In the past, once you register a plugin, you cannot remove it.
+In V7, we support runtime plugin toggling by providing two new API: &lt;code class=&quot;language-text&quot;&gt;editor.remove&lt;/code&gt; and &lt;code class=&quot;language-text&quot;&gt;editor.removeConfig&lt;/code&gt;.
+They can let users remove the plugins and configs at runtime.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight has-highlighted-lines&quot; data-language=&quot;ts&quot;&gt;&lt;pre class=&quot;language-ts&quot;&gt;&lt;code class=&quot;language-ts&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; Editor &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;@milkdown/core&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; someMilkdownPlugin &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;some-milkdown-plugin&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; editor &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;await&lt;/span&gt; Editor
+  &lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;config&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;configForPlugin&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+  &lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;use&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;someMilkdownPlugin&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+  &lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;create&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;token comment&quot;&gt;// remove plugin&lt;/span&gt;
+&lt;span class=&quot;gatsby-highlight-code-line&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;await&lt;/span&gt; editor&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;remove&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;someMilkdownPlugin&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&quot;token comment&quot;&gt;// remove config&lt;/span&gt;
+&lt;span class=&quot;gatsby-highlight-code-line&quot;&gt;editor&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;removeConfig&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;configForPlugin&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&quot;token comment&quot;&gt;// add another plugin&lt;/span&gt;
+editor&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;use&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;anotherMilkdownPlugin&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;token comment&quot;&gt;// Recreate the editor to apply changes.&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;await&lt;/span&gt; editor&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;create&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Also, if you call the &lt;code class=&quot;language-text&quot;&gt;editor.create&lt;/code&gt; method after the editor is created,
+it will recreate the editor and apply all the changes.&lt;/p&gt;
+&lt;h1&gt;Universal Widget Plugins&lt;/h1&gt;
+&lt;p&gt;We have 4 official widget plugins in V6: &lt;em&gt;slash&lt;/em&gt;, &lt;em&gt;tooltip&lt;/em&gt;, &lt;em&gt;block&lt;/em&gt; and &lt;em&gt;menu&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;They are all well designed and easy to use.
+But if you want to customize them, what you can do is really limited.
+Also, it’s hard to reuse their logic even if you want to create something similar to them.
+For example, if you want to create a mention plugin which will show a list of users when you type &lt;code class=&quot;language-text&quot;&gt;@&lt;/code&gt;,
+you need to create a new plugin from scratch.&lt;/p&gt;
+&lt;p&gt;So, in V7, we make &lt;em&gt;slash&lt;/em&gt;, &lt;em&gt;tooltip&lt;/em&gt; and &lt;em&gt;block&lt;/em&gt; plugins universal.
+You can use them to build you features easily.
+For example, if you want to create a mention plugin, you can use the new slash plugin to do that.
+Another example is that you can also create tooltips for different types of nodes.
+Display a tooltip with input when you focus on an image node, or display a tooltip with buttons when you select some text.&lt;/p&gt;
+&lt;p&gt;What about the &lt;em&gt;menu&lt;/em&gt; plugin? We removed it because we think it’s easy to create a menu plugin by yourself.
+We’ve already done that in the &lt;a href=&quot;https://milkdown.dev/playground&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;official playground&lt;/a&gt;.
+And, trust me, &lt;a href=&quot;https://github.com/milkdown/website/blob/main/src/component/Playground/Milkdown/index.tsx#L57&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;it won’t need much code&lt;/a&gt;.&lt;/p&gt;
+&lt;h1&gt;Better Vue and React Support&lt;/h1&gt;
+&lt;p&gt;Thanks to the &lt;a href=&quot;https://github.com/Saul-Mirone/prosemirror-adapter&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;Saul-Mirone/prosemirror-adapter project&lt;/a&gt;.
+In milkdown V7. We allow users to use vue and react to render lots of parts of the editor.
+For example, you can use them to render your own code block, drag handle or even small icons.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;React Example: &lt;a href=&quot;https://stackblitz.com/github/Milkdown/examples/tree/main/react-custom-component&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;&lt;img src=&quot;https://developer.stackblitz.com/img/open_in_stackblitz.svg&quot; alt=&quot;Open in StackBlitz&quot;&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Vue Example: &lt;a href=&quot;https://stackblitz.com/github/Milkdown/examples/tree/main/vue-custom-component&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;&lt;img src=&quot;https://developer.stackblitz.com/img/open_in_stackblitz.svg&quot; alt=&quot;Open in StackBlitz&quot;&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1&gt;API Documentation&lt;/h1&gt;
+&lt;p&gt;What’s the hardest thing to do when maintaining an open source project?
+Keep the documentation up to date.
+Thanks to the &lt;a href=&quot;https://github.com/marijnh/builddocs&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;marijnh/builddocs project&lt;/a&gt;,
+we can generate the API documentation automatically from the source code.&lt;/p&gt;
+&lt;p&gt;We also redesigned the documentation website, provide a more powerful playground and lots of examples.&lt;/p&gt;
+&lt;p&gt;If you like the project, please consider to give it a 🌟 on &lt;a href=&quot;https://github.com/Milkdown/milkdown&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;
+                &lt;div style=&quot;margin-top=55px; font-style: italic;&quot;&gt;(This is an article posted to my blog at saul-mirone.github.io. You can read it online by &lt;a href=&quot;https://saul-mirone.github.io/a-brief-introduction-to-milkdown-v7/&quot;&gt;clicking here&lt;/a&gt;.)&lt;/div&gt;
+              </content:encoded></item><item><title><![CDATA[Introducing Vite Book]]></title><description><![CDATA[A new way to write and manage your documentation.]]></description><link>https://saul-mirone.github.io/introducing-vite-book/</link><guid isPermaLink="false">https://saul-mirone.github.io/introducing-vite-book/</guid><pubDate>Fri, 04 Feb 2022 12:14:55 GMT</pubDate><content:encoded>&lt;h2&gt;Motivation&lt;/h2&gt;
 &lt;p&gt;In the past few years, I tried lots of documentation generators, such as &lt;a href=&quot;https://docsify.js.org/&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;docsify&lt;/a&gt;, &lt;a href=&quot;https://docusaurus.io/&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;docusaurus&lt;/a&gt;, &lt;a href=&quot;https://github.com/doczjs/docz&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;docz&lt;/a&gt;, etc… But I couldn’t find a good one that I liked for following reasons:&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;I have to switch between my markdown editor and the browser many times during writing docs to make sure they looks good. Which is really annoying when I only have one screen with me.&lt;/li&gt;
