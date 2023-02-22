@@ -1,20 +1,20 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Saul Mirone's Disenchanted Blog RSS Feed]]></title><description><![CDATA[Personal blog by Saul Mirone]]></description><link>https://saul-mirone.github.io</link><generator>GatsbyJS</generator><lastBuildDate>Sat, 26 Feb 2022 07:49:10 GMT</lastBuildDate><item><title><![CDATA[Introducing Vite Book]]></title><description><![CDATA[A new way to write and manage your documentation.]]></description><link>https://saul-mirone.github.io/introducing-vite-book/</link><guid isPermaLink="false">https://saul-mirone.github.io/introducing-vite-book/</guid><pubDate>Fri, 04 Feb 2022 12:14:55 GMT</pubDate><content:encoded>&lt;h2&gt;Motivation&lt;/h2&gt;
-&lt;p&gt;In the past few years, I tried lots of documentation generators, such as &lt;a href=&quot;https://docsify.js.org/&quot;&gt;docsify&lt;/a&gt;, &lt;a href=&quot;https://docusaurus.io/&quot;&gt;docusaurus&lt;/a&gt;, &lt;a href=&quot;https://github.com/doczjs/docz&quot;&gt;docz&lt;/a&gt;, etc… But I couldn’t find a good one that I liked for following reasons:&lt;/p&gt;
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Saul Mirone's Disenchanted Blog RSS Feed]]></title><description><![CDATA[Personal blog by Saul Mirone]]></description><link>https://saul-mirone.github.io</link><generator>GatsbyJS</generator><lastBuildDate>Wed, 22 Feb 2023 08:17:25 GMT</lastBuildDate><item><title><![CDATA[Introducing Vite Book]]></title><description><![CDATA[A new way to write and manage your documentation.]]></description><link>https://saul-mirone.github.io/introducing-vite-book/</link><guid isPermaLink="false">https://saul-mirone.github.io/introducing-vite-book/</guid><pubDate>Fri, 04 Feb 2022 12:14:55 GMT</pubDate><content:encoded>&lt;h2&gt;Motivation&lt;/h2&gt;
+&lt;p&gt;In the past few years, I tried lots of documentation generators, such as &lt;a href=&quot;https://docsify.js.org/&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;docsify&lt;/a&gt;, &lt;a href=&quot;https://docusaurus.io/&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;docusaurus&lt;/a&gt;, &lt;a href=&quot;https://github.com/doczjs/docz&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;docz&lt;/a&gt;, etc… But I couldn’t find a good one that I liked for following reasons:&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;I have to switch between my markdown editor and the browser many times during writing docs to make sure they looks good. Which is really annoying when I only have one screen with me.&lt;/li&gt;
 &lt;li&gt;Sometimes I don’t want to do so much configuration to just create a documentation site. For example, when creating a library. I just want my documentation site to be simple to setup and easy to write.&lt;/li&gt;
 &lt;li&gt;Markdown based documentation may block people that don’t know how to use markdown. It’s not common in programmers, but what about designers and PM? If they also want to contribute to the docs, they have to learn it first.&lt;/li&gt;
 &lt;/ol&gt;
 &lt;h2&gt;Introducing Vite Book&lt;/h2&gt;
-&lt;p&gt;So I created a new way to write and manage your documentation. It’s called &lt;a href=&quot;https://github.com/Saul-Mirone/vite-plugin-book&quot;&gt;Vite Book&lt;/a&gt;.
-It’s built on top of the &lt;a href=&quot;https://vitejs.dev/&quot;&gt;vite&lt;/a&gt; ecosystem. So you can use it as a vite plugin in your project.&lt;/p&gt;
+&lt;p&gt;So I created a new way to write and manage your documentation. It’s called &lt;a href=&quot;https://github.com/Saul-Mirone/vite-plugin-book&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;Vite Book&lt;/a&gt;.
+It’s built on top of the &lt;a href=&quot;https://vitejs.dev/&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;vite&lt;/a&gt; ecosystem. So you can use it as a vite plugin in your project.&lt;/p&gt;
 &lt;h3&gt;Quick Start&lt;/h3&gt;
-&lt;p&gt;Init a project using vite and add the &lt;a href=&quot;https://www.npmjs.com/package/vite-plugin-book&quot;&gt;vite-plugin-book&lt;/a&gt; package as the dependency:&lt;/p&gt;
-&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;bash&quot;&gt;&lt;pre class=&quot;language-bash&quot;&gt;&lt;code class=&quot;language-bash&quot;&gt;&lt;span class=&quot;token function&quot;&gt;npm&lt;/span&gt; init vite@latest my-vite-book -- --template vanilla
+&lt;p&gt;Init a project using vite and add the &lt;a href=&quot;https://www.npmjs.com/package/vite-plugin-book&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;vite-plugin-book&lt;/a&gt; package as the dependency:&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;bash&quot;&gt;&lt;pre class=&quot;language-bash&quot;&gt;&lt;code class=&quot;language-bash&quot;&gt;&lt;span class=&quot;token function&quot;&gt;npm&lt;/span&gt; init vite@latest my-vite-book -- &lt;span class=&quot;token parameter variable&quot;&gt;--template&lt;/span&gt; vanilla
 
 &lt;span class=&quot;token builtin class-name&quot;&gt;cd&lt;/span&gt; my-vite-book
 
-&lt;span class=&quot;token function&quot;&gt;npm&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;install&lt;/span&gt; --save vite-plugin-book&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;span class=&quot;token function&quot;&gt;npm&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;install&lt;/span&gt; &lt;span class=&quot;token parameter variable&quot;&gt;--save&lt;/span&gt; vite-plugin-book&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Then, open the &lt;code class=&quot;language-text&quot;&gt;vite.config.js&lt;/code&gt; and add the plugin:&lt;/p&gt;
 &lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;javascript&quot;&gt;&lt;pre class=&quot;language-javascript&quot;&gt;&lt;code class=&quot;language-javascript&quot;&gt;&lt;span class=&quot;token comment&quot;&gt;// vite.config.js&lt;/span&gt;
 &lt;span class=&quot;token keyword&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; book &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;vite-plugin-book/vite&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
@@ -26,7 +26,7 @@ It’s built on top of the &lt;a href=&quot;https://vitejs.dev/&quot;&gt;vite&lt
 &lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;bash&quot;&gt;&lt;pre class=&quot;language-bash&quot;&gt;&lt;code class=&quot;language-bash&quot;&gt;vite dev server running at:
 
 &lt;span class=&quot;token operator&quot;&gt;&gt;&lt;/span&gt; Local: http://localhost:3000/
-&lt;span class=&quot;token operator&quot;&gt;&gt;&lt;/span&gt; Network: use &lt;span class=&quot;token variable&quot;&gt;&lt;span class=&quot;token variable&quot;&gt;`&lt;/span&gt;--host&lt;span class=&quot;token variable&quot;&gt;`&lt;/span&gt;&lt;/span&gt; to expose
+&lt;span class=&quot;token operator&quot;&gt;&gt;&lt;/span&gt; Network: use &lt;span class=&quot;token variable&quot;&gt;&lt;span class=&quot;token variable&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;token parameter variable&quot;&gt;--host&lt;/span&gt;&lt;span class=&quot;token variable&quot;&gt;`&lt;/span&gt;&lt;/span&gt; to expose
 
 ready &lt;span class=&quot;token keyword&quot;&gt;in&lt;/span&gt; XXXms.
 
@@ -62,7 +62,7 @@ ready &lt;span class=&quot;token keyword&quot;&gt;in&lt;/span&gt; XXXms.
 &lt;span class=&quot;token function&quot;&gt;npm&lt;/span&gt; run preview&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;&lt;strong&gt;In production, the book will be readonly. Editing the book is only possible in development mode&lt;/strong&gt;.&lt;/p&gt;
 &lt;h2&gt;Online playground&lt;/h2&gt;
-&lt;p&gt;You can play with it on &lt;a href=&quot;https://stackblitz.com/edit/vitejs-vite-7u4cxt?file=package.json&quot;&gt;stackblitz&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;You can play with it on &lt;a href=&quot;https://stackblitz.com/edit/vitejs-vite-7u4cxt?file=package.json&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;stackblitz&lt;/a&gt;.&lt;/p&gt;
 &lt;h2&gt;Summary&lt;/h2&gt;
 &lt;p&gt;For now, you’ve already get a book which you can:&lt;/p&gt;
 &lt;ol&gt;
@@ -79,22 +79,16 @@ ready &lt;span class=&quot;token keyword&quot;&gt;in&lt;/span&gt; XXXms.
 &lt;li&gt;i18n&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2&gt;Support Me&lt;/h2&gt;
-&lt;p&gt;If you like this idea, please consider to give it a &lt;img class=&quot;emoji&quot; draggable=&quot;false&quot; alt=&quot;⭐️&quot; src=&quot;https://twemoji.maxcdn.com/2/72x72/2b50.png&quot; style=&quot;height: 1em; width: 1em; margin: 0 .05em 0 .1em; vertical-align: -0.1em;&quot;&gt; on &lt;a href=&quot;https://github.com/Saul-Mirone/vite-plugin-book&quot;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;&lt;img class=&quot;emoji&quot; draggable=&quot;false&quot; alt=&quot;❤️&quot; src=&quot;https://twemoji.maxcdn.com/2/72x72/2764.png&quot; style=&quot;height: 1em; width: 1em; margin: 0 .05em 0 .1em; vertical-align: -0.1em;&quot;&gt;You can fund me to help the maintenance and development:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/sponsors/Saul-Mirone&quot;&gt;Github Sponsor&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://afdian.net/@mirone&quot;&gt;Afdian&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://opencollective.com/milkdown&quot;&gt;Open Collective&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
+&lt;p&gt;If you like this idea, please consider to give it a 🌟 on &lt;a href=&quot;https://github.com/Saul-Mirone/vite-plugin-book&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;
                 &lt;div style=&quot;margin-top=55px; font-style: italic;&quot;&gt;(This is an article posted to my blog at saul-mirone.github.io. You can read it online by &lt;a href=&quot;https://saul-mirone.github.io/introducing-vite-book/&quot;&gt;clicking here&lt;/a&gt;.)&lt;/div&gt;
-              </content:encoded></item><item><title><![CDATA[How to Design a Type Friendly Context]]></title><description><![CDATA[IoC is the key.]]></description><link>https://saul-mirone.github.io/how-to-design-a-type-friendly-context/</link><guid isPermaLink="false">https://saul-mirone.github.io/how-to-design-a-type-friendly-context/</guid><pubDate>Tue, 03 Aug 2021 12:29:40 GMT</pubDate><content:encoded>&lt;p&gt;In the world of JavaScript, &lt;a href=&quot;https://koajs.com/&quot;&gt;Koa&lt;/a&gt; is a milestone.
-Although &lt;a href=&quot;http://sinatrarb.com/&quot;&gt;sinatra&lt;/a&gt; is born before it,
+              </content:encoded></item><item><title><![CDATA[How to Design a Type Friendly Context]]></title><description><![CDATA[IoC is the key.]]></description><link>https://saul-mirone.github.io/how-to-design-a-type-friendly-context/</link><guid isPermaLink="false">https://saul-mirone.github.io/how-to-design-a-type-friendly-context/</guid><pubDate>Tue, 03 Aug 2021 12:29:40 GMT</pubDate><content:encoded>&lt;p&gt;In the world of JavaScript, &lt;a href=&quot;https://koajs.com/&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;Koa&lt;/a&gt; is a milestone.
+Although &lt;a href=&quot;http://sinatrarb.com/&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;sinatra&lt;/a&gt; is born before it,
 Koa makes it really popular that apps should built by a simple core to load plugins,
 and bundles of plugins to implement unique features.
 Today lots of apps are built with this pattern.
-For example, &lt;a href=&quot;https://code.visualstudio.com/&quot;&gt;vscode&lt;/a&gt; and &lt;a href=&quot;https://webpack.js.org/&quot;&gt;webpack&lt;/a&gt;.&lt;/p&gt;
+For example, &lt;a href=&quot;https://code.visualstudio.com/&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;vscode&lt;/a&gt; and &lt;a href=&quot;https://webpack.js.org/&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;webpack&lt;/a&gt;.&lt;/p&gt;
 &lt;h1&gt;Context in JavaScript&lt;/h1&gt;
-&lt;p&gt;In the world of Koa, &lt;code class=&quot;language-text&quot;&gt;ctx&lt;/code&gt; is a magic box &lt;img class=&quot;emoji&quot; draggable=&quot;false&quot; alt=&quot;🔮&quot; src=&quot;https://twemoji.maxcdn.com/2/72x72/1f52e.png&quot; style=&quot;height: 1em; width: 1em; margin: 0 .05em 0 .1em; vertical-align: -0.1em;&quot;&gt;.
+&lt;p&gt;In the world of Koa, &lt;code class=&quot;language-text&quot;&gt;ctx&lt;/code&gt; is a magic box :crystal_ball:.
 Users can get all sorts of properties on it.
 For example, you can get &lt;code class=&quot;language-text&quot;&gt;ctx.session&lt;/code&gt; if you install the &lt;strong&gt;koa-session&lt;/strong&gt; plugin.
 And you can get &lt;code class=&quot;language-text&quot;&gt;ctx.request.body&lt;/code&gt; if you install the &lt;strong&gt;koa-body&lt;/strong&gt; plugin.&lt;/p&gt;
@@ -116,10 +110,10 @@ And you can get &lt;code class=&quot;language-text&quot;&gt;ctx.request.body&lt;
 &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;h1&gt;Static Type Checking&lt;/h1&gt;
 &lt;p&gt;Everything seems perfect until static type system join the game,
-which is bring in by &lt;a href=&quot;https://www.typescriptlang.org/&quot;&gt;TypeScript&lt;/a&gt; and &lt;a href=&quot;https://flow.org/&quot;&gt;Flow&lt;/a&gt;.
-With the safe type checking and powerful editor &lt;a href=&quot;https://microsoft.github.io/language-server-protocol/&quot;&gt;lsp&lt;/a&gt; features,
+which is bring in by &lt;a href=&quot;https://www.typescriptlang.org/&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;TypeScript&lt;/a&gt; and &lt;a href=&quot;https://flow.org/&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;Flow&lt;/a&gt;.
+With the safe type checking and powerful editor &lt;a href=&quot;https://microsoft.github.io/language-server-protocol/&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;lsp&lt;/a&gt; features,
 people use them to build not only large systems, but also small apps and tools.&lt;/p&gt;
-&lt;p&gt;But when Koa meets static type checking, &lt;img class=&quot;emoji&quot; draggable=&quot;false&quot; alt=&quot;💥&quot; src=&quot;https://twemoji.maxcdn.com/2/72x72/1f4a5.png&quot; style=&quot;height: 1em; width: 1em; margin: 0 .05em 0 .1em; vertical-align: -0.1em;&quot;&gt; everything stop working.
+&lt;p&gt;But when Koa meets static type checking, :boom: everything stop working.
 Type system cannot infer what property is really on &lt;code class=&quot;language-text&quot;&gt;ctx&lt;/code&gt; and what’s not.
 For example, if I call &lt;code class=&quot;language-text&quot;&gt;ctx.foo&lt;/code&gt;, how do I know wether the plugin inject the &lt;code class=&quot;language-text&quot;&gt;foo&lt;/code&gt; property is loaded in current Koa app or not?
 What’s more, users can’t get the hint of the editor because the type system don’t know what to suggest.&lt;/p&gt;
@@ -127,7 +121,7 @@ What’s more, users can’t get the hint of the editor because the type system 
 how to handle object shared between modules elegantly?&lt;/p&gt;
 &lt;hr&gt;
 &lt;h1&gt;Design&lt;/h1&gt;
-&lt;p&gt;The key is using &lt;a href=&quot;https://en.wikipedia.org/wiki/Inversion_of_control&quot;&gt;IoC&lt;/a&gt;.
+&lt;p&gt;The key is using &lt;a href=&quot;https://en.wikipedia.org/wiki/Inversion_of_control&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;IoC&lt;/a&gt;.
 With this pattern we can &lt;em&gt;inject type information into context&lt;/em&gt;.&lt;/p&gt;
 &lt;p&gt;Let’s reconsider the design of context in koa,
 we can see that the context is an object with properties you can modify, such as &lt;code class=&quot;language-text&quot;&gt;ctx.foo&lt;/code&gt;.
@@ -204,7 +198,7 @@ And a slice factory that can be used to inject on context.&lt;/p&gt;
         &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
     &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
 &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;We use a simple &lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map&quot;&gt;Map&lt;/a&gt; as the container of slices, with the &lt;code class=&quot;language-text&quot;&gt;symbol&lt;/code&gt; as key so the slices will not be conflict between each other.&lt;/p&gt;
+&lt;p&gt;We use a simple &lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;Map&lt;/a&gt; as the container of slices, with the &lt;code class=&quot;language-text&quot;&gt;symbol&lt;/code&gt; as key so the slices will not be conflict between each other.&lt;/p&gt;
 &lt;h1&gt;Testing&lt;/h1&gt;
 &lt;p&gt;Now our context has been done, let’s do some test:&lt;/p&gt;
 &lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;typescript&quot;&gt;&lt;pre class=&quot;language-typescript&quot;&gt;&lt;code class=&quot;language-typescript&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; num &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;createSlice&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
@@ -302,7 +296,7 @@ values&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span cla
                 &lt;div style=&quot;margin-top=55px; font-style: italic;&quot;&gt;(This is an article posted to my blog at saul-mirone.github.io. You can read it online by &lt;a href=&quot;https://saul-mirone.github.io/how-to-design-a-type-friendly-context/&quot;&gt;clicking here&lt;/a&gt;.)&lt;/div&gt;
               </content:encoded></item><item><title><![CDATA[A Complete Guide to TypeScript Decorators]]></title><description><![CDATA[Decorators make your code leaner.]]></description><link>https://saul-mirone.github.io/a-complete-guide-to-typescript-decorator/</link><guid isPermaLink="false">https://saul-mirone.github.io/a-complete-guide-to-typescript-decorator/</guid><pubDate>Mon, 07 Sep 2020 17:44:55 GMT</pubDate><content:encoded>&lt;p&gt;Decorators make the world of TypeScript better.
 People use lots of libraries built based on this awesome feature,
-for example: &lt;a href=&quot;https://angular.io/&quot;&gt;Angular&lt;/a&gt; and &lt;a href=&quot;https://nestjs.com/&quot;&gt;Nestjs&lt;/a&gt;.
+for example: &lt;a href=&quot;https://angular.io/&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;Angular&lt;/a&gt; and &lt;a href=&quot;https://nestjs.com/&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;Nestjs&lt;/a&gt;.
 In this blog I will explore decorators with many details.
 I hope you can figure out when and how to use this powerful feature after read this blog.&lt;/p&gt;
 &lt;h1&gt;Overview&lt;/h1&gt;
@@ -316,7 +310,7 @@ I hope you can figure out when and how to use this powerful feature after read t
 &lt;/ol&gt;
 &lt;p&gt;So, applying decorators is a lot like composing a chain of functions,
 pretty much like higher-order function or class.
-With decorators, we can easily implement &lt;a href=&quot;https://en.wikipedia.org/wiki/Proxy_pattern&quot;&gt;proxy pattern&lt;/a&gt; to reduce our code and do some cool things.&lt;/p&gt;
+With decorators, we can easily implement &lt;a href=&quot;https://en.wikipedia.org/wiki/Proxy_pattern&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;proxy pattern&lt;/a&gt; to reduce our code and do some cool things.&lt;/p&gt;
 &lt;p&gt;The syntax of a decorator is pretty simple, just add the &lt;code class=&quot;language-text&quot;&gt;@&lt;/code&gt; operator before the decorator you want to use, then the decorator will be applied to the target:&lt;/p&gt;
 &lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;typescript&quot;&gt;&lt;pre class=&quot;language-typescript&quot;&gt;&lt;code class=&quot;language-typescript&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;simpleDecorator&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
   &lt;span class=&quot;token builtin&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&apos;---hi I am a decorator---&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
@@ -506,7 +500,7 @@ the classes to overwrite the original &lt;code class=&quot;language-text&quot;&g
 &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
 
 &lt;span class=&quot;token keyword&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;token class-name&quot;&gt;Foo&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;foo&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;token comment&quot;&gt;// Property &apos;foo&apos; does not exist on type &apos;Foo&apos;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;This is &lt;a href=&quot;https://github.com/microsoft/TypeScript/issues/4881&quot;&gt;a well-known issue&lt;/a&gt; in Typescript.
+&lt;p&gt;This is &lt;a href=&quot;https://github.com/microsoft/TypeScript/issues/4881&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;a well-known issue&lt;/a&gt; in Typescript.
 What we can do for now is to provide a class with type information to be extended by the target class:&lt;/p&gt;
 &lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;typescript&quot;&gt;&lt;pre class=&quot;language-typescript&quot;&gt;&lt;code class=&quot;language-typescript&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;declare&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;token generic-function&quot;&gt;&lt;span class=&quot;token function&quot;&gt;Blah&lt;/span&gt;&lt;span class=&quot;token generic class-name&quot;&gt;&lt;span class=&quot;token operator&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;token constant&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;target&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token constant&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token constant&quot;&gt;T&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;&amp;amp;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;foo&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token builtin&quot;&gt;number&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
 
@@ -590,7 +584,7 @@ c&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;bar &lt;span clas
 &lt;/ol&gt;
 or the prototype of the class for an instance member.
 2. &lt;code class=&quot;language-text&quot;&gt;propertyKey&lt;/code&gt;: The name of the property.
-3. &lt;code class=&quot;language-text&quot;&gt;descriptor&lt;/code&gt;: The property &lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/getOwnPropertyDescriptor&quot;&gt;descriptor&lt;/a&gt; for the member;&lt;/li&gt;
+3. &lt;code class=&quot;language-text&quot;&gt;descriptor&lt;/code&gt;: The property &lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/getOwnPropertyDescriptor&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;descriptor&lt;/a&gt; for the member;&lt;/li&gt;
 &lt;li&gt;@Returns:&lt;br&gt;
 If returns a value, it will be used as the descriptor of the member.&lt;/li&gt;
 &lt;/ul&gt;
@@ -757,11 +751,11 @@ it is important for us to understand not only the evaluation order,
 but also the duty of different types of decorators.&lt;/p&gt;
 &lt;h1&gt;Metadata&lt;/h1&gt;
 &lt;p&gt;Strictly speaking, metadata and decorators are two separate parts of ECMAScript.
-However, if you want to play with something like &lt;a href=&quot;https://en.wikipedia.org/wiki/Reflection_(computer_programming)&quot;&gt;reflection&lt;/a&gt;,
+However, if you want to play with something like &lt;a href=&quot;https://en.wikipedia.org/wiki/Reflection_(computer_programming)&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;reflection&lt;/a&gt;,
 you always need both of them.&lt;/p&gt;
 &lt;p&gt;Just look at our previous example. what if we don’t want to write different types of validators?
 Is it possible to just write one validator which can &lt;strong&gt;infer&lt;/strong&gt; the validators from the type annotation of the method?&lt;/p&gt;
-&lt;p&gt;With the help of &lt;a href=&quot;https://github.com/rbuckton/reflect-metadata&quot;&gt;reflect-metadata&lt;/a&gt;,
+&lt;p&gt;With the help of &lt;a href=&quot;https://github.com/rbuckton/reflect-metadata&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;reflect-metadata&lt;/a&gt;,
 we can get the design-time types.&lt;/p&gt;
 &lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;typescript&quot;&gt;&lt;pre class=&quot;language-typescript&quot;&gt;&lt;code class=&quot;language-typescript&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;reflect-metadata&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
 
@@ -946,7 +940,7 @@ we have two options:&lt;/p&gt;
       &lt;span class=&quot;token attr-name&quot;&gt;hideSideMenu&lt;/span&gt;&lt;span class=&quot;token script language-javascript&quot;&gt;&lt;span class=&quot;token script-punctuation punctuation&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;hideSideMenu&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;/&gt;&lt;/span&gt;&lt;/span&gt;
   &lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
 &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;We can abstract a &lt;a href=&quot;https://reactjs.org/docs/higher-order-components.html&quot;&gt;HOC&lt;/a&gt; to do this:&lt;/p&gt;
+&lt;p&gt;We can abstract a &lt;a href=&quot;https://reactjs.org/docs/higher-order-components.html&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;HOC&lt;/a&gt; to do this:&lt;/p&gt;
 &lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;jsx&quot;&gt;&lt;pre class=&quot;language-jsx&quot;&gt;&lt;code class=&quot;language-jsx&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;token function-variable function&quot;&gt;ConsumeWithSelector&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token parameter&quot;&gt;Component&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; context&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; selector&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
   &lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; ctx &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;selector&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;React&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;useContext&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;context&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
   &lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; React&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;memo&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token parameter&quot;&gt;props&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;&amp;lt;&lt;/span&gt;Component &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;...&lt;/span&gt;props&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;...&lt;/span&gt;ctx &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;&gt;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
@@ -1078,10 +1072,10 @@ and then you get a ‘printer renderer’.&lt;/p&gt;
 &lt;strong&gt;For every render, there is a new element tree.&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;It’s possible to create dom elements every time for every render.
 However, that’s a highly costly processing.
-In fact, React use the &lt;a href=&quot;https://reactjs.org/docs/reconciliation.html&quot;&gt;reconciliation&lt;/a&gt; to
+In fact, React use the &lt;a href=&quot;https://reactjs.org/docs/reconciliation.html&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;reconciliation&lt;/a&gt; to
 know what to do exactly: regenerating the dom element or just updating some contents.&lt;/p&gt;
 &lt;p&gt;As a renderer of React,
-it just needs to implement an interface for &lt;a href=&quot;https://github.com/facebook/react/tree/master/packages/react-reconciler&quot;&gt;Reconciler&lt;/a&gt;,
+it just needs to implement an interface for &lt;a href=&quot;https://github.com/facebook/react/tree/master/packages/react-reconciler&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;Reconciler&lt;/a&gt;,
 then Reconciler will update using the methods we provide.
 I can use the following pseudo code to describe the relationship between ReactDOM and Reconciler:&lt;/p&gt;
 &lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;javascript&quot;&gt;&lt;pre class=&quot;language-javascript&quot;&gt;&lt;code class=&quot;language-javascript&quot;&gt;ReactDOMRenderer &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;Reconciler&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;ReactDOMHostConfig&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
@@ -1097,8 +1091,8 @@ It’s something like this:&lt;/p&gt;
   &lt;span class=&quot;token function&quot;&gt;removeChild&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token parameter&quot;&gt;parentInstance&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; child&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
 &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;We could probably know what each method should deal with by the method name.
-&lt;a href=&quot;https://github.com/facebook/react/blob/master/packages/react-reconciler/src/forks/ReactFiberHostConfig.custom.js&quot;&gt;The full list of methods is here&lt;/a&gt;.
-For further information, &lt;a href=&quot;https://medium.com/@agent_hunt/hello-world-custom-react-renderer-9a95b7cd04bc&quot;&gt;here is a good post to read&lt;/a&gt;.&lt;/p&gt;
+&lt;a href=&quot;https://github.com/facebook/react/blob/master/packages/react-reconciler/src/forks/ReactFiberHostConfig.custom.js&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;The full list of methods is here&lt;/a&gt;.
+For further information, &lt;a href=&quot;https://medium.com/@agent_hunt/hello-world-custom-react-renderer-9a95b7cd04bc&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;here is a good post to read&lt;/a&gt;.&lt;/p&gt;
 &lt;h1&gt;In Closing&lt;/h1&gt;
 &lt;p&gt;Now, let’s conclude what happens during a React update:&lt;/p&gt;
 &lt;ol&gt;
@@ -1109,10 +1103,10 @@ For further information, &lt;a href=&quot;https://medium.com/@agent_hunt/hello-w
 &lt;li&gt;Call methods provided by react renderer to commit the update.&lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;If components have a high cost every render,
-You may need to use something like &lt;a href=&quot;https://reactjs.org/docs/react-api.html#reactmemo&quot;&gt;React.memo&lt;/a&gt; to avoid unnecessary calculation.
+You may need to use something like &lt;a href=&quot;https://reactjs.org/docs/react-api.html#reactmemo&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;React.memo&lt;/a&gt; to avoid unnecessary calculation.
 At least for now we know exactly why we need this and other things like &lt;code class=&quot;language-text&quot;&gt;React.useMemo&lt;/code&gt; or &lt;code class=&quot;language-text&quot;&gt;React.useCallback&lt;/code&gt;,
 and why functions in React hook’s dependency lists can cause infinite execution.&lt;/p&gt;
 &lt;p&gt;If this post is really helpful to you,
-I highly recommend you to read Dan Abramov’s great post ”&lt;a href=&quot;https://overreacted.io/react-as-a-ui-runtime/&quot;&gt;React as a UI Runtime&lt;/a&gt;“.&lt;/p&gt;
+I highly recommend you to read Dan Abramov’s great post ”&lt;a href=&quot;https://overreacted.io/react-as-a-ui-runtime/&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;React as a UI Runtime&lt;/a&gt;“.&lt;/p&gt;
                 &lt;div style=&quot;margin-top=55px; font-style: italic;&quot;&gt;(This is an article posted to my blog at saul-mirone.github.io. You can read it online by &lt;a href=&quot;https://saul-mirone.github.io/the-essence-of-react-component/&quot;&gt;clicking here&lt;/a&gt;.)&lt;/div&gt;
               </content:encoded></item></channel></rss>
