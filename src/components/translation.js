@@ -49,14 +49,11 @@ const Translation = ({ translations, location }) => {
       <Panel>
         <span>Translated into: </span>
         <>
-          {translations.map(l => {
-            console.log(location.pathname)
-            return (
-              <Link key={l} to={`/${l}/${location.pathname.replaceAll('/', '')}`}>
-                {codeToLanguage(l)}
-              </Link>
-            )
-          })}
+          {translations.map(l => (
+            <Link key={l} to={`/${l}/${location.pathname.replaceAll('/', '')}`}>
+              {codeToLanguage(l)}
+            </Link>
+          ))}
         </>
       </Panel>
     </div>
