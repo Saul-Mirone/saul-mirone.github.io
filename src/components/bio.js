@@ -7,20 +7,13 @@
 
 import React from "react"
 import { useStaticQuery, graphql } from "gatsby"
-import avatar from "../../content/assets/profile-pic.jpg"
+import avatar from "../../content/assets/avatar.png"
 
 import { rhythm } from "../utils/typography"
 
 const Bio = () => {
   const data = useStaticQuery(graphql`
     query BioQuery {
-      avatar: file(absolutePath: { regex: "/profile-pic.jpg/" }) {
-        childImageSharp {
-          fixed(width: 50, height: 50) {
-            ...GatsbyImageSharpFixed
-          }
-        }
-      }
       site {
         siteMetadata {
           author

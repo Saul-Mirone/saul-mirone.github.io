@@ -129,10 +129,4 @@ I'll continue work on this library to make it support more features. The followi
 
 ## Support Me
 
-If you like this idea, please consider to give it a :star: on [GitHub](https://github.com/Saul-Mirone/vite-plugin-book).
-
-:heart:You can fund me to help the maintenance and development:
-
-*   [Github Sponsor](https://github.com/sponsors/Saul-Mirone)
-*   [Afdian](https://afdian.net/@mirone)
-*   [Open Collective](https://opencollective.com/milkdown)
+If you like this idea, please consider to give it a 🌟 on [GitHub](https://github.com/Saul-Mirone/vite-plugin-book).
