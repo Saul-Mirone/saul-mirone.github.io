@@ -1,10 +1,10 @@
 ---
 title: A Brief Introduction to Milkdown v7
 date: "2023-02-22T17:56:19.162Z"
-description: A brand new version of [Milkdown](https://milkdown.dev) is coming. Let's take a look at what's new.
+description: A brand new version of milkdown is coming. Let's take a look at what's new.
 ---
 
-It's been almost one year since the release of milkdown V6.
+It's been almost one year since the release of [milkdown](https://milkdown.dev) V6.
 It helped a lot of users to build their own markdown based applications.
 It has 13k downloads per month and I feel so grateful that users like that.
 
@@ -154,5 +154,7 @@ Thanks to the [marijnh/builddocs project](https://github.com/marijnh/builddocs),
 we can generate the API documentation automatically from the source code.
 
 We also redesigned the documentation website, provide a more powerful playground and lots of examples.
+
+Ready to try it? [https://milkdown.dev](https://milkdown.dev)
 
 If you like the project, please consider to give it a 🌟 on [GitHub](https://github.com/Milkdown/milkdown).
