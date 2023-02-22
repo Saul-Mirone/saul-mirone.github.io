@@ -3,6 +3,6 @@ type Props = {
 }
 
 export const Container = ({ children }: Props) => {
-  return <div className="container mx-auto px-5">{children}</div>
+  return <div className="container prose mx-auto px-5">{children}</div>
 }
 
