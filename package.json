@@ -10,7 +10,7 @@
     "gatsby-plugin-manifest": "^5.7.0",
     "gatsby-plugin-offline": "^6.7.0",
     "gatsby-plugin-pnpm": "^1.2.10",
-    "gatsby-plugin-sharp": "^5.7.0",
+    "gatsby-plugin-sharp": "^5.8.1",
     "gatsby-plugin-typography": "^5.7.0",
     "gatsby-remark-copy-linked-files": "^6.7.0",
     "gatsby-remark-external-links": "^0.0.4",
