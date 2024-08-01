@@ -5,7 +5,7 @@ module.exports = {
     description: `Personal blog by Mirone`,
     siteUrl: `https://saul-mirone.github.io`,
     social: {
-      twitter: `@SaulMirone`,
+      twitter: `@mirone_saul`,
       github: `Saul-Mirone`
     },
   },
