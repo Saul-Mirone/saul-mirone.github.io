@@ -93,7 +93,7 @@ In the past, once you register a plugin, you cannot remove it.
 In V7, we support runtime plugin toggling by providing two new API: `editor.remove` and `editor.removeConfig`.
 They can let users remove the plugins and configs at runtime.
 
-```ts{10,13}
+```ts
 import { Editor } from '@milkdown/core';
 import { someMilkdownPlugin } from 'some-milkdown-plugin';
 
