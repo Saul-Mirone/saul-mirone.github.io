@@ -9,10 +9,6 @@
       "groupName": "oxlint"
     },
     {
-      "matchPackageNames": ["react", "react-dom"],
-      "enabled": false
-    },
-    {
       "groupName": "all non-major dependencies",
       "groupSlug": "all-minor-patch",
       "matchUpdateTypes": ["minor", "patch"],
