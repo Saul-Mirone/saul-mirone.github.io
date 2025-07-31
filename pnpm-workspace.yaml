@@ -1,3 +1,9 @@
-# Optional: Define workspace packages if needed in the future
 packages:
-  - '.'
+  - .
+
+ignoredBuiltDependencies:
+  - '@tailwindcss/oxide'
+  - esbuild
+
+onlyBuiltDependencies:
+  - sharp
