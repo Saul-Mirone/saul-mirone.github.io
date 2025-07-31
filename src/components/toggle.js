@@ -11,7 +11,7 @@ const Toggle = React.memo(
   ({ checked, defaultChecked, icons, className, ...inputProps }) => {
     const ref = React.useRef(null)
     const [isChecked, setIsChecked] = React.useState(
-      !!(checked || defaultChecked)
+      !!(checked || defaultChecked),
     )
 
     React.useEffect(() => {
@@ -69,6 +69,6 @@ const Toggle = React.memo(
         />
       </div>
     )
-  }
+  },
 )
 export default Toggle

@@ -5,7 +5,7 @@ description: Render forever.
 ---
 
 Maybe you have used React for a long time:
-using the elegant jsx with React hooks to create pages built up with components. 
+using the elegant jsx with React hooks to create pages built up with components.
 However, why do we only need to write declarative components to let React manage itself?
 Furthermore, what are these components we write every day?
 
@@ -14,37 +14,34 @@ Furthermore, what are these components we write every day?
 Consider the following code implementing a simple clock, guess what will be printed in the chrome devtools.
 
 ```javascript
-const Text = () =>  {
-  console.log('Text');
-  return <p>Just text.</p>;
-};
+const Text = () => {
+  console.log("Text")
+  return <p>Just text.</p>
+}
 
 const App = () => {
-  const [clock, setClock] = React.useState(new Date().toISOString());
-  console.log('App');
+  const [clock, setClock] = React.useState(new Date().toISOString())
+  console.log("App")
 
   React.useEffect(() => {
-     const interval = setInterval(
-       () => setClock(new Date().toISOString()),
-       1000
-     );
-     return () => clearInterval(interval);
-  }, []);
-  
+    const interval = setInterval(() => setClock(new Date().toISOString()), 1000)
+    return () => clearInterval(interval)
+  }, [])
+
   return (
     <>
       <div>clock: {clock}</div>
       <Text />
     </>
-  );
-};
+  )
+}
 ```
 
 The fact is that it will print `App` and `Text` together every second.
 
 React components are just functions. If you have experience in TypeScript with React project,
 you may have met a useful type annotation: `React.FC`, which is just an acronym for `FunctionComponent`.
-The definition of it is something like: 
+The definition of it is something like:
 
 ```typescript
 type FC<P> = (props: P) => ReactElement
@@ -65,9 +62,11 @@ const Something = () => {
 }
 // turn into
 const Something = () => {
-  return React.createElement('p', null,
-    'foo',
-    React.createElement('span', null, 'bar')
+  return React.createElement(
+    "p",
+    null,
+    "foo",
+    React.createElement("span", null, "bar"),
   )
 }
 ```
@@ -78,21 +77,21 @@ generating an element tree in the end.
 
 So the render of a component is the same as a function call.
 That's why we get `App` and `Text` every second in the previous sample.
-The state's update of the component trigger the rerender of that component, which cause the function called. 
+The state's update of the component trigger the rerender of that component, which cause the function called.
 
 # Elements For Render
 
 Elements are just a kind of data structure. You can regard them as objects.
-For example: 
+For example:
 
 ```javascript
-// <p className='hello'>Hello</p> 
+// <p className='hello'>Hello</p>
 // -> turn into
 const element = {
-  type: 'p',
+  type: "p",
   key: null,
-  props: { className: 'hello' },
-  children: ['Hello']
+  props: { className: "hello" },
+  children: ["Hello"],
 }
 ```
 
@@ -107,13 +106,13 @@ When an update occurs, a new element will be generated, like this:
 
 ```javascript
 // we have a update
-// <p className='hello'>updated</p> 
+// <p className='hello'>updated</p>
 // -> turn into
 const element = {
-  type: 'p',
+  type: "p",
   key: null,
-  props: { className: 'hello' },
-  children: ['updated']
+  props: { className: "hello" },
+  children: ["updated"],
 }
 ```
 
@@ -147,13 +146,13 @@ export const hostConfig = {
   createTextInstance: text => {},
   appendInitialChild: (parent, child) => {},
   appendChild(parent, child) {},
-  removeChild(parentInstance, child) {}
-};
+  removeChild(parentInstance, child) {},
+}
 ```
 
 We could probably know what each method should deal with by the method name.
 [The full list of methods is here](https://github.com/facebook/react/blob/master/packages/react-reconciler/src/forks/ReactFiberHostConfig.custom.js).
-For further information, [here is a good post to read](https://medium.com/@agent_hunt/hello-world-custom-react-renderer-9a95b7cd04bc). 
+For further information, [here is a good post to read](https://medium.com/@agent_hunt/hello-world-custom-react-renderer-9a95b7cd04bc).
 
 # In Closing
 

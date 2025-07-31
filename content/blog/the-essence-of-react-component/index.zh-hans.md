@@ -13,30 +13,27 @@ description: 永远渲染。
 考虑以下代码，它实现了一个简单的时钟，猜猜最终打印在chrome控制台中的是什么？
 
 ```javascript
-const Text = () =>  {
-  console.log('Text');
-  return <p>Just text.</p>;
-};
+const Text = () => {
+  console.log("Text")
+  return <p>Just text.</p>
+}
 
 const App = () => {
-  const [clock, setClock] = React.useState(new Date().toISOString());
-  console.log('App');
+  const [clock, setClock] = React.useState(new Date().toISOString())
+  console.log("App")
 
   React.useEffect(() => {
-     const interval = setInterval(
-       () => setClock(new Date().toISOString()),
-       1000
-     );
-     return () => clearInterval(interval);
-  }, []);
-  
+    const interval = setInterval(() => setClock(new Date().toISOString()), 1000)
+    return () => clearInterval(interval)
+  }, [])
+
   return (
     <>
       <div>clock: {clock}</div>
       <Text />
     </>
-  );
-};
+  )
+}
 ```
 
 事实是每秒，控制台中都会将`App`和`Text`一起打印出来。
@@ -64,9 +61,11 @@ const Something = () => {
 }
 // 编译为
 const Something = () => {
-  return React.createElement('p', null,
-    'foo',
-    React.createElement('span', null, 'bar')
+  return React.createElement(
+    "p",
+    null,
+    "foo",
+    React.createElement("span", null, "bar"),
   )
 }
 ```
@@ -84,13 +83,13 @@ const Something = () => {
 元素其实只是一种数据结构，你可以把它们看作对象，例如：
 
 ```javascript
-// <p className='hello'>Hello</p> 
+// <p className='hello'>Hello</p>
 // -> 转换为
 const element = {
-  type: 'p',
+  type: "p",
   key: null,
-  props: { className: 'hello' },
-  children: ['Hello']
+  props: { className: "hello" },
+  children: ["Hello"],
 }
 ```
 
@@ -103,13 +102,13 @@ const element = {
 
 ```javascript
 // we have a update
-// <p className='hello'>updated</p> 
+// <p className='hello'>updated</p>
 // -> 转换为
 const element = {
-  type: 'p',
+  type: "p",
   key: null,
-  props: { className: 'hello' },
-  children: ['updated']
+  props: { className: "hello" },
+  children: ["updated"],
 }
 ```
 
@@ -143,13 +142,13 @@ export const hostConfig = {
   createTextInstance: text => {},
   appendInitialChild: (parent, child) => {},
   appendChild(parent, child) {},
-  removeChild(parentInstance, child) {}
-};
+  removeChild(parentInstance, child) {},
+}
 ```
 
 我们可以通过方法的命名来大概得知每个方法是用来处理什么工作。
 [完整的方法列表可以在这里查看](https://github.com/facebook/react/blob/master/packages/react-reconciler/src/forks/ReactFiberHostConfig.custom.js)。
-如果想要知道更多关于React Renderer的知识, [这里有一篇很好的博客推荐阅读](https://medium.com/@agent_hunt/hello-world-custom-react-renderer-9a95b7cd04bc)。 
+如果想要知道更多关于React Renderer的知识, [这里有一篇很好的博客推荐阅读](https://medium.com/@agent_hunt/hello-world-custom-react-renderer-9a95b7cd04bc)。
 
 # 总结
 

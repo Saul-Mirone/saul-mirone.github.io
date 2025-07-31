@@ -33,11 +33,11 @@ Then, open the `vite.config.js` and add the plugin:
 
 ```javascript
 // vite.config.js
-import { book } from 'vite-plugin-book/vite';
+import { book } from "vite-plugin-book/vite"
 
 export default {
-    plugins: [book()],
-};
+  plugins: [book()],
+}
 ```
 
 After that, you can just run `npm run dev`, and you'll see the following message in terminal:
@@ -86,15 +86,15 @@ Add following code to your `main.js`:
 
 ```javascript
 // Don't forget to import css!
-import 'vite-plugin-book/style.css';
+import "vite-plugin-book/style.css"
 
-import { renderBook } from 'vite-plugin-book';
+import { renderBook } from "vite-plugin-book"
 
 renderBook({
-    isProd: import.meta.env.PROD,
-    baseUrl: import.meta.env.BASE_URL,
-    container: '#app',
-});
+  isProd: import.meta.env.PROD,
+  baseUrl: import.meta.env.BASE_URL,
+  container: "#app",
+})
 ```
 
 Then, you can observe the book in production with:
@@ -116,7 +116,7 @@ For now, you've already get a book which you can:
 
 1. Write and manage documents just in browser.
 2. Ready for deployment.
-3. Have mobile support, sidebar, dark mode, loading status, share, etc... out of the box. 
+3. Have mobile support, sidebar, dark mode, loading status, share, etc... out of the box.
 
 ## What's next?
 

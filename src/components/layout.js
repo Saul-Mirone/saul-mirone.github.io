@@ -54,33 +54,38 @@ const Header = ({ title, location }) => {
 
 const themeKey = "theme"
 
-const defaultTheme = typeof window !== 'undefined' && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? "night" : "light"
+const defaultTheme =
+  typeof window !== "undefined" &&
+  window.matchMedia &&
+  window.matchMedia("(prefers-color-scheme: dark)").matches
+    ? "night"
+    : "light"
 const Layout = ({ location, title, social, children }) => {
-  const [theme, setTheme] = React.useState(defaultTheme);
+  const [theme, setTheme] = React.useState(defaultTheme)
 
   React.useEffect(() => {
     if (typeof window === undefined) {
-      return;
+      return
     }
     const onChange = event => {
       setTheme(event.matches ? "night" : "light")
     }
-    const media = window.matchMedia('(prefers-color-scheme: dark)');
-    media.addEventListener('change', onChange);
+    const media = window.matchMedia("(prefers-color-scheme: dark)")
+    media.addEventListener("change", onChange)
     return () => {
-      media.removeEventListener('change', onChange);
+      media.removeEventListener("change", onChange)
     }
   }, [])
 
   React.useEffect(() => {
-    if (typeof window === 'undefined') return;
+    if (typeof window === "undefined") return
 
-    const theme = window.localStorage.getItem(themeKey);
+    const theme = window.localStorage.getItem(themeKey)
 
-    if (!theme) return;
+    if (!theme) return
 
-    setTheme(theme);
-  }, []);
+    setTheme(theme)
+  }, [])
 
   React.useEffect(() => {
     document.body.className = theme
@@ -138,7 +143,7 @@ const Layout = ({ location, title, social, children }) => {
         />
       </header>
       <main>{children}</main>
-      <footer style={{marginTop: '4.375rem', paddingTop: '1.75rem'}}>
+      <footer style={{ marginTop: "4.375rem", paddingTop: "1.75rem" }}>
         <div style={{ float: "right" }}>
           <a href="/rss.xml" target="_blank" rel="noopener noreferrer">
             rss

@@ -6,7 +6,7 @@ module.exports = {
     siteUrl: `https://saul-mirone.github.io`,
     social: {
       twitter: `@mirone_saul`,
-      github: `Saul-Mirone`
+      github: `Saul-Mirone`,
     },
   },
   plugins: [
@@ -42,21 +42,21 @@ module.exports = {
             },
           },
           {
-            resolve: 'gatsby-remark-prismjs',
+            resolve: "gatsby-remark-prismjs",
             options: {
-              inlineCodeMarker: '÷',
+              inlineCodeMarker: "÷",
             },
           },
           `gatsby-remark-copy-linked-files`,
           `gatsby-remark-smartypants`,
           {
-            resolve: 'gatsby-remark-external-links',
+            resolve: "gatsby-remark-external-links",
             options: {
-              target: '_blank',
+              target: "_blank",
             },
           },
-        ]
-      }
+        ],
+      },
     },
     {
       resolve: `gatsby-plugin-feed`,

@@ -17,29 +17,24 @@ exports.createPages = async ({ graphql, actions }) => {
     })
   })
 
-  const result = await graphql(
-    `
-      {
-        allMarkdownRemark(
-          sort: {frontmatter: {date: DESC}}
-          limit: 1000
-        ) {
-          edges {
-            node {
-              fields {
-                slug
-                langKey
-                directoryName
-              }
-              frontmatter {
-                title
-              }
+  const result = await graphql(`
+    {
+      allMarkdownRemark(sort: { frontmatter: { date: DESC } }, limit: 1000) {
+        edges {
+          node {
+            fields {
+              slug
+              langKey
+              directoryName
+            }
+            frontmatter {
+              title
             }
           }
         }
       }
-    `
-  )
+    }
+  `)
 
   if (result.errors) {
     throw result.errors
@@ -64,10 +59,10 @@ exports.createPages = async ({ graphql, actions }) => {
   }, {})
 
   const defaultLangPosts = posts.filter(
-    ({ node }) => node.fields.langKey === "en"
+    ({ node }) => node.fields.langKey === "en",
   )
   const otherLangPosts = posts.filter(
-    ({ node }) => node.fields.langKey !== "en"
+    ({ node }) => node.fields.langKey !== "en",
   )
 
   defaultLangPosts.forEach((post, index) => {

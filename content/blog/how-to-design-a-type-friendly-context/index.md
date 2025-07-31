@@ -22,19 +22,18 @@ A typical Koa plugin (also known as middleware) will be like:
 
 ```javascript
 app.use(async (ctx, next) => {
+  // inject props into ctx
+  ctx.foo = "bar"
 
-    // inject props into ctx
-    ctx.foo = 'bar';
+  const startTime = Date.now()
 
-    const startTime = Date.now();
+  await next()
 
-    await next();
+  // do something after other ctx done.
+  const endTime = Date.now()
+  const duration = endTime - startTime
 
-    // do something after other ctx done.
-    const endTime = Date.now();
-    const duration = endTime - startTime;
-
-    console.log('Ctx duration:', duration);
+  console.log("Ctx duration:", duration)
 })
 ```
 
@@ -68,31 +67,31 @@ Since the creation of foo is what we can control, we can write some information 
 So, let's assume the API of context is designed as this:
 
 ```typescript
-const ctx = createCtx();
+const ctx = createCtx()
 
-const numberSlice = createSlice(0);
+const numberSlice = createSlice(0)
 
 // inject a ctx.
-ctx.inject(numberSlice);
+ctx.inject(numberSlice)
 
-const number = ctx.get(numberSlice); // -> 0
+const number = ctx.get(numberSlice) // -> 0
 
 // set value of numberSlice to 1.
-ctx.set(numberSlice, number + 1);
+ctx.set(numberSlice, number + 1)
 ```
 
 I introduced you a new data structure: `slice`.
-With this design, We just *split up* the entire `ctx` into several pieces of `slice`s.
+With this design, We just _split up_ the entire `ctx` into several pieces of `slice`s.
 
 Now we can get define the structure of `ctx` and `slice`:
 
 ```typescript
-type Ctx = Map<symbol, Slice>;
+type Ctx = Map<symbol, Slice>
 
 type Slice<T = unknown> = {
-    id: symbol;
-    set: (value: T) => void;
-    get: () => T;
+  id: symbol
+  set: (value: T) => void
+  get: () => T
 }
 ```
 
@@ -102,30 +101,31 @@ Then, let's try to implement the slice:
 
 ```typescript
 type Metadata<T> = {
-    id: symbol;
-    (ctx: Ctx): Slice<T>;
-};
+  id: symbol
+  (ctx: Ctx): Slice<T>
+}
 
 const createSlice = <T>(defaultValue: T): Metadata<T> => {
-    const id = Symbol('Slice');
+  const id = Symbol("Slice")
 
-    const metadata = (ctx: Ctx) => {
-        let inner = defaultValue;
-        const slice: Slice<T> = {
-            id,
-            set: (next) => {
-                inner = next;
-            },
-            get: () => inner
-        }
-        ctx.set(id, slice as Slice);
-        return slice;
+  const metadata = (ctx: Ctx) => {
+    let inner = defaultValue
+    const slice: Slice<T> = {
+      id,
+      set: next => {
+        inner = next
+      },
+      get: () => inner,
     }
-    metadata.id = id;
+    ctx.set(id, slice as Slice)
+    return slice
+  }
+  metadata.id = id
 
-    return metadata;
+  return metadata
 }
 ```
+
 We create a `metadata` that brings slice's information on it.
 And a slice factory that can be used to inject on context.
 
@@ -135,25 +135,26 @@ The implementation of ctx will be much simpler:
 
 ```typescript
 const createCtx = () => {
-    const map: Ctx = new Map();
+  const map: Ctx = new Map()
 
-    const getSlice = <T>(metadata: Metadata<T>): Slice<T> => {
-        const value = map.get(metadata.id);
-        if (!value) {
-            throw new Error('Slice not injected');
-        }
-        return value as Slice<T>;
+  const getSlice = <T>(metadata: Metadata<T>): Slice<T> => {
+    const value = map.get(metadata.id)
+    if (!value) {
+      throw new Error("Slice not injected")
     }
+    return value as Slice<T>
+  }
 
-    return {
-        inject: <T>(metadata: Metadata<T>) => metadata(map),
-        get: <T>(metadata: Metadata<T>): T => getSlice(metadata).get(),
-        set: <T>(metadata: Metadata<T>, value: T): void => {
-            getSlice(metadata).set(value);
-        }
-    }
+  return {
+    inject: <T>(metadata: Metadata<T>) => metadata(map),
+    get: <T>(metadata: Metadata<T>): T => getSlice(metadata).get(),
+    set: <T>(metadata: Metadata<T>, value: T): void => {
+      getSlice(metadata).set(value)
+    },
+  }
 }
 ```
+
 We use a simple [Map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map) as the container of slices, with the `symbol` as key so the slices will not be conflict between each other.
 
 # Testing
@@ -161,22 +162,21 @@ We use a simple [Map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Re
 Now our context has been done, let's do some test:
 
 ```typescript
-const num = createSlice(0);
-const ctx1 = createCtx();
-const ctx2 = createCtx();
+const num = createSlice(0)
+const ctx1 = createCtx()
+const ctx2 = createCtx()
 
-ctx1.inject(num);
-ctx2.inject(num);
+ctx1.inject(num)
+ctx2.inject(num)
 
-const x = ctx1.get(num); // editor will know x is number
-ctx1.set(num, x + 1);
+const x = ctx1.get(num) // editor will know x is number
+ctx1.set(num, x + 1)
 
 // this line will have an error since num slice only accept number
-ctx.set(num, 'string')
+ctx.set(num, "string")
 
-
-ctx1.get(num); // => 1
-ctx2.get(num); // => still 0
+ctx1.get(num) // => 1
+ctx2.get(num) // => still 0
 ```
 
 Now we have built a type friendly context using IoC,
@@ -188,79 +188,79 @@ but values will be isolated.
 # Full Code
 
 ```typescript
-type Ctx = Map<symbol, Slice>;
+type Ctx = Map<symbol, Slice>
 
 type Slice<T = unknown> = {
-  id: symbol;
-  set: (value: T) => void;
-  get: () => T;
-};
+  id: symbol
+  set: (value: T) => void
+  get: () => T
+}
 
 type Metadata<T> = {
-  id: symbol;
-  (ctx: Ctx): Slice<T>;
-};
+  id: symbol
+  (ctx: Ctx): Slice<T>
+}
 
 const createSlice = <T>(defaultValue: T): Metadata<T> => {
-  const id = Symbol("Slice");
+  const id = Symbol("Slice")
 
   const metadata = (ctx: Ctx) => {
-    let inner = defaultValue;
+    let inner = defaultValue
     const slice: Slice<T> = {
       id,
-      set: (next) => {
-        inner = next;
+      set: next => {
+        inner = next
       },
-      get: () => inner
-    };
-    ctx.set(id, slice as Slice);
-    return slice;
-  };
-  metadata.id = id;
+      get: () => inner,
+    }
+    ctx.set(id, slice as Slice)
+    return slice
+  }
+  metadata.id = id
 
-  return metadata;
-};
+  return metadata
+}
 
 const createCtx = () => {
-  const map: Ctx = new Map();
+  const map: Ctx = new Map()
 
   const getSlice = <T>(metadata: Metadata<T>): Slice<T> => {
-    const value = map.get(metadata.id);
+    const value = map.get(metadata.id)
     if (!value) {
-      throw new Error("Slice not injected");
+      throw new Error("Slice not injected")
     }
-    return value as Slice<T>;
-  };
+    return value as Slice<T>
+  }
 
   return {
     inject: <T>(metadata: Metadata<T>) => metadata(map),
     get: <T>(metadata: Metadata<T>): T => getSlice(metadata).get(),
     set: <T>(metadata: Metadata<T>, value: T): void => {
-      getSlice(metadata).set(value);
-    }
-  };
-};
+      getSlice(metadata).set(value)
+    },
+  }
+}
 ```
 
 Testing:
 
 ```typescript
-const num = createSlice(0);
-const ctx1 = createCtx();
-const ctx2 = createCtx();
+const num = createSlice(0)
+const ctx1 = createCtx()
+const ctx2 = createCtx()
 
-ctx1.inject(num);
-ctx2.inject(num);
+ctx1.inject(num)
+ctx2.inject(num)
 
-const values = [];
+const values = []
 
-const x = ctx1.get(num);
-values.push(x);
+const x = ctx1.get(num)
+values.push(x)
 
-ctx1.set(num, x + 1);
+ctx1.set(num, x + 1)
 
-values.push(ctx1.get(num));
-values.push(ctx2.get(num));
+values.push(ctx1.get(num))
+values.push(ctx2.get(num))
 
-expect(values).toEqual([0, 1, 0]);
+expect(values).toEqual([0, 1, 0])
 ```

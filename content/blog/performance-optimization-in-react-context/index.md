@@ -15,54 +15,55 @@ Everything seems worked fine until one day he found the app is too slow to use.
 Consider the following code, it may be the worst practice of React context.
 
 ```jsx
-const Ctx = React.createContext();
+const Ctx = React.createContext()
 
 const SideMenu = () => {
-  const { setHideSideMenu, hideSideMenu } = useContext(Ctx);
+  const { setHideSideMenu, hideSideMenu } = useContext(Ctx)
   return (
     <aside>
       <Menu hide={hideSideMenu} />
       <button onClick={() => setHideSideMenu(x => !x)}>toggle</button>
     </aside>
-  );
-};
+  )
+}
 
 const UserDashBoard = () => {
-  const { user, setUser } = useContext(Ctx);
+  const { user, setUser } = useContext(Ctx)
   React.useEffect(() => {
-    fetchUser().then((data) => setUser(data.user));
-  }, []);
-  
-  return <User username={user} />
-};
+    fetchUser().then(data => setUser(data.user))
+  }, [])
 
+  return <User username={user} />
+}
 
 const App = () => {
-  const [user, setUser] = React.useState('');
-  const [hideSideMenu, setHideSideMenu] = React.useState(false);
-  const [clock, setClock] = React.useState(Date.now());
+  const [user, setUser] = React.useState("")
+  const [hideSideMenu, setHideSideMenu] = React.useState(false)
+  const [clock, setClock] = React.useState(Date.now())
 
   React.useEffect(() => {
     const interval = setInterval(() => {
       setClock(Date.now())
     }, 1000)
     return () => {
-      clearInterval(interval);
+      clearInterval(interval)
     }
-  }, []);
-  
+  }, [])
+
   return (
-    <Ctx.Provider value={{
-      user,
-      setUser,
-      hideSideMenu,
-      setHideSideMenu,
-    }}>
+    <Ctx.Provider
+      value={{
+        user,
+        setUser,
+        hideSideMenu,
+        setHideSideMenu,
+      }}
+    >
       <Clock time={clock} />
       <SideMenu />
       <UserDashBoard />
     </Ctx.Provider>
-  );
+  )
 }
 ```
 
@@ -115,20 +116,22 @@ const SideMenuInner = React.memo(({ setHideSideMenu, hideSideMenu }) => {
       <Menu hide={hideSideMenu} />
       <button onClick={() => setHideSideMenu(x => !x)}>toggle</button>
     </aside>
-  );
-});
+  )
+})
 
 const SideMenu = () => {
-  const { setHideSideMenu, hideSideMenu } = React.useContext(Ctx);
+  const { setHideSideMenu, hideSideMenu } = React.useContext(Ctx)
   return (
     <SideMenuInner
       setHideSideMenu={setHideSideMenu}
-      hideSideMenu={hideSideMenu} />
-  );
-};
+      hideSideMenu={hideSideMenu}
+    />
+  )
+}
 ```
 
 We can abstract a [HOC](https://reactjs.org/docs/higher-order-components.html) to do this:
+
 ```jsx
 const ConsumeWithSelector = (Component, context, selector) => {
   const ctx = selector(React.useContext(context));
@@ -140,14 +143,17 @@ const ConsumeWithSelector = (Component, context, selector) => {
 
 ```jsx
 const SideMenu = () => {
-  const { setHideSideMenu, hideSideMenu } = useContext(Ctx);
-  return React.useMemo(() => (
-    <aside>
-      <Menu hide={hideSideMenu} />
-      <button onClick={() => setHideSideMenu(x => !x)}>toggle</button>
-    </aside>
-  ), [hideSideMenu, setHideSideMenu]);
-};
+  const { setHideSideMenu, hideSideMenu } = useContext(Ctx)
+  return React.useMemo(
+    () => (
+      <aside>
+        <Menu hide={hideSideMenu} />
+        <button onClick={() => setHideSideMenu(x => !x)}>toggle</button>
+      </aside>
+    ),
+    [hideSideMenu, setHideSideMenu],
+  )
+}
 ```
 
 # Split Context

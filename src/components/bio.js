@@ -47,7 +47,14 @@ const Bio = () => {
       />
       <p style={{ whiteSpace: "pre-wrap" }}>
         Personal blog by{" "}
-        <a target="_blank" rel="noreferrer" href={`https://github.com/${social.github}`}>{author}</a>.{"\n"}
+        <a
+          target="_blank"
+          rel="noreferrer"
+          href={`https://github.com/${social.github}`}
+        >
+          {author}
+        </a>
+        .{"\n"}
         Kiss the demons out of my dreams.
       </p>
     </div>

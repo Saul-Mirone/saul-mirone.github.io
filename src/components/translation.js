@@ -50,7 +50,7 @@ const Translation = ({ translations, location }) => {
         <span>Translated into: </span>
         <>
           {translations.map(l => (
-            <Link key={l} to={`/${l}/${location.pathname.replaceAll('/', '')}`}>
+            <Link key={l} to={`/${l}/${location.pathname.replaceAll("/", "")}`}>
               {codeToLanguage(l)}
             </Link>
           ))}

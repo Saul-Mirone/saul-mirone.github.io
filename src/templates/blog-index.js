@@ -48,7 +48,7 @@ const BlogIndex = ({ data, location, pageContext }) => {
 export default BlogIndex
 
 export const pageQuery = graphql`
-  query($langKey: String!) {
+  query ($langKey: String!) {
     site {
       siteMetadata {
         title
@@ -60,7 +60,7 @@ export const pageQuery = graphql`
     }
     allMarkdownRemark(
       filter: { fields: { langKey: { eq: $langKey } } }
-      sort: {frontmatter: {date: DESC}}
+      sort: { frontmatter: { date: DESC } }
     ) {
       edges {
         node {
