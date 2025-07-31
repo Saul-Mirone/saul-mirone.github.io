@@ -1,0 +1,48 @@
+---
+export interface Props {
+  title: string;
+  pathname: string;
+}
+
+const { title, pathname } = Astro.props;
+const isHome = pathname === '/' || pathname === '/en/';
+---
+
+<header class="flex justify-between items-center mb-10">
+  {isHome ? (
+    <h1 class="text-3xl font-bold font-montserrat mb-0">
+      <a href="/" class="text-gray-900 dark:text-gray-100 no-underline hover:underline">
+        {title}
+      </a>
+    </h1>
+  ) : (
+    <h3 class="text-xl font-montserrat mb-0">
+      <a href="/" class="text-blue-600 dark:text-blue-400 no-underline hover:underline">
+        {title}
+      </a>
+    </h3>
+  )}
+  
+  <button
+    id="theme-toggle"
+    class="p-2 rounded-lg bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
+    aria-label="Toggle theme"
+  >
+    <img
+      src="/assets/sun.png"
+      alt="Light mode"
+      class="w-4 h-4 dark:hidden"
+    />
+    <img
+      src="/assets/moon.png"
+      alt="Dark mode"
+      class="w-4 h-4 hidden dark:block"
+    />
+  </button>
+</header>
+
+<script>
+  document.getElementById('theme-toggle')?.addEventListener('click', () => {
+    document.documentElement.classList.toggle('dark');
+  });
+</script>

@@ -1,0 +1,145 @@
+---
+import { type CollectionEntry, getCollection } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import Bio from '../../components/Bio.astro';
+
+export async function getStaticPaths() {
+  const blogEntries = await getCollection('blog', ({ data }) => {
+    return data.lang === 'zh-hans';
+  });
+  return blogEntries.map(entry => {
+    // Remove 'indexzh-hans' from the slug for cleaner URLs
+    // e.g., 'a-complete-guide-to-typescript-decorator/indexzh-hans' -> 'a-complete-guide-to-typescript-decorator'
+    const cleanSlug = entry.slug.replace(/\/indexzh-hans$/, '');
+    return {
+      params: { slug: cleanSlug },
+      props: { entry },
+    };
+  });
+}
+
+interface Props {
+  entry: CollectionEntry<'blog'>;
+}
+
+const { entry } = Astro.props;
+const { Content } = await entry.render();
+
+const allPosts = await getCollection('blog', ({ data }) => {
+  return !data.draft && data.lang === entry.data.lang;
+});
+
+const sortedPosts = allPosts.sort((a, b) => 
+  new Date(b.data.date).getTime() - new Date(a.data.date).getTime()
+);
+
+const currentIndex = sortedPosts.findIndex(post => post.slug === entry.slug);
+const previousPost = currentIndex < sortedPosts.length - 1 ? sortedPosts[currentIndex + 1] : null;
+const nextPost = currentIndex > 0 ? sortedPosts[currentIndex - 1] : null;
+
+const title = "Disenchanted";
+---
+
+<Layout 
+  title={`${entry.data.title} | ${title}`}
+  description={entry.data.description}
+  lang={entry.data.lang}
+>
+  <div class="max-w-4xl mx-auto px-6 py-8">
+    <Header title={title} pathname={Astro.url.pathname} />
+    
+    <main>
+      <article>
+        <header class="mb-8">
+          <h1 class="text-4xl font-bold text-gray-900 dark:text-gray-100 mb-4">
+            {entry.data.title}
+          </h1>
+          <time
+            datetime={entry.data.date.toISOString()}
+            class="text-sm text-gray-600 dark:text-gray-400"
+          >
+            {entry.data.date.toLocaleDateString('zh-CN', {
+              year: 'numeric',
+              month: 'long',
+              day: 'numeric',
+            })}
+          </time>
+        </header>
+        
+        <div class="prose prose-lg dark:prose-invert max-w-none">
+          <Content />
+        </div>
+        
+        <hr class="my-8 border-gray-200 dark:border-gray-700" />
+        
+        <footer>
+          <Bio />
+        </footer>
+      </article>
+      
+      <nav class="mt-12">
+        <ul class="flex flex-wrap justify-between list-none p-0">
+          <li>
+            {previousPost && (
+              <a
+                href={`/zh-hans/${previousPost.slug.replace(/\/indexzh-hans$/, '')}/`}
+                rel="prev"
+                class="text-blue-600 dark:text-blue-400 hover:underline"
+              >
+                ← {previousPost.data.title}
+              </a>
+            )}
+          </li>
+          <li>
+            {nextPost && (
+              <a
+                href={`/zh-hans/${nextPost.slug.replace(/\/indexzh-hans$/, '')}/`}
+                rel="next"
+                class="text-blue-600 dark:text-blue-400 hover:underline"
+              >
+                {nextPost.data.title} →
+              </a>
+            )}
+          </li>
+        </ul>
+      </nav>
+    </main>
+    
+    <Footer />
+  </div>
+</Layout>
+
+<style>
+  @reference "../../styles/global.css";
+
+  .prose {
+    @apply text-gray-900 dark:text-gray-100;
+  }
+  
+  .prose h1,
+  .prose h2,
+  .prose h3,
+  .prose h4,
+  .prose h5,
+  .prose h6 {
+    @apply text-gray-900 dark:text-gray-100;
+  }
+  
+  .prose a {
+    @apply text-blue-600 dark:text-blue-400;
+  }
+  
+  .prose code {
+    @apply bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-gray-100 px-1 py-0.5 rounded;
+  }
+  
+  .prose pre {
+    @apply bg-gray-100 dark:bg-gray-800;
+  }
+  
+  .prose blockquote {
+    @apply border-l-gray-300 dark:border-l-gray-600 text-gray-700 dark:text-gray-300;
+  }
+</style>

@@ -1,0 +1,38 @@
+---
+const social = {
+  twitter: "@mirone_saul",
+  github: "Saul-Mirone",
+};
+---
+
+<footer class="mt-16 pt-8 border-t border-gray-200 dark:border-gray-700">
+  <div class="flex justify-between items-center text-sm text-gray-600 dark:text-gray-400">
+    <div class="space-x-4">
+      <a
+        href={`https://twitter.com/${social.twitter}`}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="hover:text-blue-600 dark:hover:text-blue-400"
+      >
+        twitter
+      </a>
+      <span>•</span>
+      <a
+        href={`https://github.com/${social.github}`}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="hover:text-blue-600 dark:hover:text-blue-400"
+      >
+        github
+      </a>
+    </div>
+    <a
+      href="/rss.xml"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="hover:text-blue-600 dark:hover:text-blue-400"
+    >
+      rss
+    </a>
+  </div>
+</footer>

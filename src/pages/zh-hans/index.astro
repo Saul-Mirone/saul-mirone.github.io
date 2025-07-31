@@ -1,0 +1,65 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import Bio from '../../components/Bio.astro';
+
+const allBlogPosts = await getCollection('blog', ({ data }) => {
+  return !data.draft && data.lang === 'zh-hans';
+});
+
+// Sort posts by date in descending order
+const sortedPosts = allBlogPosts.sort((a, b) => 
+  new Date(b.data.date).getTime() - new Date(a.data.date).getTime()
+);
+
+const title = "Disenchanted";
+---
+
+<Layout title={title} lang="zh-hans">
+  <div class="max-w-4xl mx-auto px-6 py-8">
+    <Header title={title} pathname={Astro.url.pathname} />
+    
+    <main>
+      <Bio />
+      
+      <div class="mt-16">
+        {sortedPosts.map((post) => {
+          const { title, date, description } = post.data;
+          return (
+            <article class="mb-12 pb-8 border-b border-gray-200 dark:border-gray-700 last:border-b-0">
+              <header>
+                <h2 class="text-2xl font-bold mb-2">
+                  <a
+                    href={`/zh-hans/${post.slug.replace(/\/indexzh-hans$/, '')}/`}
+                    class="text-gray-900 dark:text-gray-100 hover:text-blue-600 dark:hover:text-blue-400 no-underline"
+                  >
+                    {title}
+                  </a>
+                </h2>
+                <time
+                  datetime={date.toISOString()}
+                  class="text-sm text-gray-600 dark:text-gray-400"
+                >
+                  {date.toLocaleDateString('zh-CN', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric',
+                  })}
+                </time>
+              </header>
+              {description && (
+                <p class="mt-4 text-gray-700 dark:text-gray-300">
+                  {description}
+                </p>
+              )}
+            </article>
+          );
+        })}
+      </div>
+    </main>
+    
+    <Footer />
+  </div>
+</Layout>

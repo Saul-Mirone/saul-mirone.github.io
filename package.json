@@ -1,57 +1,28 @@
 {
   "name": "disenchanted",
-  "private": true,
+  "type": "module",
   "version": "0.1.0",
   "author": "Mirone Saul <saul-mirone@gmail.com>",
-  "dependencies": {
-    "gatsby": "^5.14.5",
-    "gatsby-plugin-feed": "^5.14.0",
-    "gatsby-plugin-i18n": "^1.0.1",
-    "gatsby-plugin-manifest": "^5.14.0",
-    "gatsby-plugin-offline": "^6.14.0",
-    "gatsby-plugin-pnpm": "^1.2.10",
-    "gatsby-plugin-sharp": "^5.14.0",
-    "gatsby-plugin-typography": "^5.14.0",
-    "gatsby-remark-copy-linked-files": "^6.14.0",
-    "gatsby-remark-external-links": "^0.0.4",
-    "gatsby-remark-images": "^7.14.0",
-    "gatsby-remark-prismjs": "^7.14.0",
-    "gatsby-remark-responsive-iframe": "^6.14.0",
-    "gatsby-remark-smartypants": "^6.14.0",
-    "gatsby-source-filesystem": "^5.14.0",
-    "gatsby-transformer-remark": "^6.14.0",
-    "gatsby-transformer-sharp": "^5.14.0",
-    "graphql": "^16.8.1",
-    "prismjs": "^1.30.0",
-    "react": "^18.0.0",
-    "react-dom": "^18.0.0",
-    "react-helmet": "^6.1.0",
-    "react-typography": "^0.16.23",
-    "typeface-merriweather": "1.1.13",
-    "typeface-montserrat": "1.1.13",
-    "typography": "^0.16.21",
-    "typography-theme-wordpress-2016": "^0.16.19"
-  },
-  "devDependencies": {
-    "prettier": "3.6.2"
-  },
-  "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/saul-mirone/saul-mirone.github.io.git"
-  },
   "scripts": {
-    "build": "gatsby build",
-    "dev": "gatsby develop",
-    "format": "prettier --write \"**/*.{js,jsx,json,md,tx,tsx}\"",
-    "serve": "gatsby serve",
-    "clean": "gatsby clean",
-    "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1"
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
   },
-  "pnpm": {
-    "onlyBuiltDependencies": [
-      "sharp"
-    ]
-  },
-  "packageManager": "pnpm@10.13.1+sha512.37ebf1a5c7a30d5fabe0c5df44ee8da4c965ca0c5af3dbab28c3a1681b70a256218d05c81c9c0dcf767ef6b8551eb5b960042b9ed4300c59242336377e01cfad"
+  "packageManager": "pnpm@10.13.1",
+  "dependencies": {
+    "@astrojs/mdx": "^4.3.1",
+    "@astrojs/react": "^4.3.0",
+    "@astrojs/rss": "^4.0.12",
+    "@astrojs/sitemap": "^3.4.2",
+    "@tailwindcss/typography": "0.5.0-alpha.3",
+    "@tailwindcss/vite": "^4.1.11",
+    "@types/react": "^19.1.9",
+    "@types/react-dom": "^19.1.7",
+    "astro": "^5.12.6",
+    "react": "^19.1.1",
+    "react-dom": "^19.1.1",
+    "tailwindcss": "^4.0.0"
+  }
 }

@@ -1,0 +1,3 @@
+# Optional: Define workspace packages if needed in the future
+packages:
+  - '.'
