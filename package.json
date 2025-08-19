@@ -10,7 +10,7 @@
     "preview": "astro preview",
     "astro": "astro"
   },
-  "packageManager": "pnpm@10.14.0",
+  "packageManager": "pnpm@10.15.0",
   "dependencies": {
     "@astrojs/mdx": "^4.3.1",
     "@astrojs/react": "^4.3.0",
