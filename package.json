@@ -6,7 +6,9 @@
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
-    "build": "astro build",
+    "build": "astro build && workbox injectManifest workbox-config.cjs",
+    "build:astro": "astro build",
+    "build:sw": "workbox injectManifest workbox-config.cjs",
     "preview": "astro preview",
     "astro": "astro"
   },
@@ -25,5 +27,8 @@
     "react-dom": "^19.1.1",
     "sharp": "^0.34.3",
     "tailwindcss": "^4.0.0"
+  },
+  "devDependencies": {
+    "workbox-cli": "^7.3.0"
   }
 }
