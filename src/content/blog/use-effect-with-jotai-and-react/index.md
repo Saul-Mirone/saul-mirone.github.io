@@ -547,6 +547,24 @@ Now our theme service automatically reads the initial theme from localStorage, a
 
 ---
 
+# Performance Considerations
+
+When using Effect TS with Jotai in production applications, consider these performance optimizations:
+
+1. **Fine-grained Atoms**: Split large state objects into smaller, focused atoms to minimize unnecessary re-renders.
+
+2. **Runtime Lifecycle**: Create runtime instances once and reuse them across components rather than creating new ones.
+
+3. **Selective Subscriptions**: Use Jotai's `qualityFn`, `prevSlice` or `selectAtom` from `jotai/utils` to subscribe only to specific parts of complex state.
+
+4. **Batch Updates**: Leverage React's batching mechanisms to group multiple state updates together.
+
+5. **Effect Composition**: Compose effects efficiently and avoid unnecessary Effect chains that could impact performance.
+
+These optimizations become more important as your application scales and the number of atoms and effects grows.
+
+---
+
 # Conclusion
 
 By combining Effect TS with Jotai, we can achieve a clean separation between business logic and UI state management. The `EffectScope` bridge reduces boilerplate code and provides a reactive interface that works seamlessly with React components.
