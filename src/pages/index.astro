@@ -1,5 +1,9 @@
 ---
-import { getCollection } from 'astro:content';
+import { type CollectionEntry, getCollection } from 'astro:content';
+
+function getSlug(entry: CollectionEntry<'blog'>) {
+  return entry.id.replace(/\/index(zh-hans)?$/, '');
+}
 import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
@@ -32,7 +36,7 @@ const title = "Disenchanted";
               <header>
                 <h2 class="text-2xl font-bold mb-2">
                   <a
-                    href={`/${post.slug}/`}
+                    href={`/${getSlug(post)}/`}
                     class="text-gray-900 dark:text-gray-100 hover:text-blue-600 dark:hover:text-blue-400 no-underline"
                   >
                     {title}

@@ -1,5 +1,5 @@
 ---
-import { type CollectionEntry, getCollection } from 'astro:content';
+import { type CollectionEntry, getCollection, render } from 'astro:content';
 import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
@@ -11,9 +11,13 @@ export async function getStaticPaths() {
     return !data.lang || data.lang === 'en';
   });
   return blogEntries.map(entry => ({
-    params: { slug: entry.slug },
+    params: { slug: entry.id.replace(/\/index(zh-hans)?$/, '') },
     props: { entry },
   }));
+}
+
+function getSlug(entry: CollectionEntry<'blog'>) {
+  return entry.id.replace(/\/index(zh-hans)?$/, '');
 }
 
 interface Props {
@@ -21,17 +25,17 @@ interface Props {
 }
 
 const { entry } = Astro.props;
-const { Content } = await entry.render();
+const { Content } = await render(entry);
 
 const allPosts = await getCollection('blog', ({ data }) => {
   return !data.draft && data.lang === entry.data.lang;
 });
 
-const sortedPosts = allPosts.sort((a, b) => 
+const sortedPosts = allPosts.sort((a, b) =>
   new Date(b.data.date).getTime() - new Date(a.data.date).getTime()
 );
 
-const currentIndex = sortedPosts.findIndex(post => post.slug === entry.slug);
+const currentIndex = sortedPosts.findIndex(post => post.id === entry.id);
 const previousPost = currentIndex < sortedPosts.length - 1 ? sortedPosts[currentIndex + 1] : null;
 const nextPost = currentIndex > 0 ? sortedPosts[currentIndex - 1] : null;
 
@@ -80,7 +84,7 @@ const title = "Disenchanted";
           <li>
             {previousPost && (
               <a
-                href={`/${previousPost.slug}/`}
+                href={`/${getSlug(previousPost)}/`}
                 rel="prev"
                 class="text-blue-600 dark:text-blue-400 hover:underline"
               >
@@ -91,7 +95,7 @@ const title = "Disenchanted";
           <li>
             {nextPost && (
               <a
-                href={`/${nextPost.slug}/`}
+                href={`/${getSlug(nextPost)}/`}
                 rel="next"
                 class="text-blue-600 dark:text-blue-400 hover:underline"
               >

@@ -19,7 +19,7 @@ export async function GET(context: APIContext) {
       title: post.data.title,
       pubDate: post.data.date,
       description: post.data.description,
-      link: `/${post.slug}/`,
+      link: `/${post.id.replace(/\/index(zh-hans)?$/, '')}/`,
     })),
     customData: `<language>en-us</language>`,
   });

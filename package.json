@@ -16,7 +16,7 @@
   "dependencies": {
     "@astrojs/mdx": "^5.0.0",
     "@astrojs/react": "^5.0.0",
-    "@astrojs/rss": "^4.0.12",
+    "@astrojs/rss": "^4.0.17",
     "@astrojs/sitemap": "^3.4.2",
     "@tailwindcss/typography": "0.5.19",
     "@tailwindcss/vite": "^4.1.11",
