@@ -14,7 +14,7 @@
   },
   "packageManager": "pnpm@11.1.1",
   "dependencies": {
-    "@astrojs/mdx": "^5.0.0",
+    "@astrojs/mdx": "^6.0.0",
     "@astrojs/react": "^5.0.0",
     "@astrojs/rss": "^4.0.17",
     "@astrojs/sitemap": "^3.4.2",
